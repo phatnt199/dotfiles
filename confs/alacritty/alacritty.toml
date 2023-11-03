@@ -1,0 +1,98 @@
+[colors.bright]
+black = "#636363"
+blue = "#7EAAC7"
+cyan = "#86D3CE"
+green = "#87AFAF"
+magenta = "#924653"
+red = "#AF5F5F"
+white = "#F7F7F7"
+yellow = "#EBC17A"
+
+[colors.cursor]
+cursor = "#D9D9D9"
+text = "#2C2C2C"
+
+[colors.dim]
+black = "#232323"
+blue = "#556B79"
+cyan = "#5C8482"
+green = "#5E6547"
+magenta = "#6E4962"
+red = "#74423F"
+white = "#828282"
+yellow = "#8B7653"
+
+[colors.normal]
+black = "#080808"
+blue = "#7EAAC7"
+cyan = "#86D3CE"
+green = "#87AFAF"
+magenta = "#924653"
+red = "#AF5F5F"
+white = "#EEEEEE"
+yellow = "#EBC17A"
+
+[colors.primary]
+background = "#080808"
+foreground = "#EEE2DE"
+
+[colors.vi_mode_cursor]
+cursor = "CellForeground"
+text = "CellBackground"
+
+[font]
+size = 9
+
+[font.bold]
+family = "UbuntuMono Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "UbuntuMono Nerd Font"
+style = "Bold Italic"
+
+[font.italic]
+family = "UbuntuMono Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "UbuntuMono Nerd Font"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 0
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Control|Shift"
+
+[scrolling]
+history = 8000
+multiplier = 4
+
+[shell]
+args = ["-c", "tmux"]
+program = "/bin/zsh"
+
+[window]
+decorations = "full"
+decorations_theme_variant = "Dark"
+dynamic_padding = false
+dynamic_title = true
+opacity = 1.0
+startup_mode = "Windowed"
+title = "Phat Nguyen"
+
+[window.dimensions]
+columns = 264
+lines = 64
+
+[window.padding]
+x = 0
+y = 0
+
+[window.position]
+x = 0
+y = 0
