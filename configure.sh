@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# echo "Backup current configurations..."
 # ------------------------------------------------------------------
 BASE_FOLDER=$(pwd)
 echo "Base folder: $BASE_FOLDER"
@@ -15,13 +14,8 @@ ln -s "$BASE_FOLDER/confs/tmux/.tmux.conf" "$HOME/.tmux.conf"
 # ------------------------------------------------------------------
 echo "Configuring NEOVIM..."
 is_neovim_available=$(command -v nvim > /dev/null)
-neovim_version=$(nvim --version | head -1 | grep -o '[0-9]\.[0-9]')
-
 if ! $is_neovim_available; then
   echo "NEOVIM is not installed | Required version >= 0.9"
-  exit 1
-elif [ $(echo $neovim_version >= 0.9 | bc -l) ]; then
-  echo "Wrong version of NEOVIM | Required version >= 0.9"
   exit 1
 else
   echo "NEOVIM is installed | Start configuring..."

@@ -40,6 +40,7 @@ set.signcolumn = 'yes'
 set.termguicolors = true
 set.background = 'dark'
 set.fillchars = 'vert:│'
+set.clipboard = 'unnamedplus'
 
 local diabled_providers = { 'python3', 'node', 'perl', 'ruby' }
 for index in ipairs(diabled_providers) do
