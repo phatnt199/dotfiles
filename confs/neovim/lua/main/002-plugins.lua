@@ -17,6 +17,7 @@ Plug 'nvim-telescope/telescope-media-files.nvim'
 
 Plug 'mhartington/formatter.nvim'
 Plug ('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'numToStr/Comment.nvim'
 Plug 'windwp/nvim-autopairs'
 
