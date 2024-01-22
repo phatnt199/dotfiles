@@ -73,7 +73,7 @@ history = 8000
 multiplier = 4
 
 [shell]
-args = ["-c", "tmux"]
+# args = ["-c", "tmux"]
 program = "/bin/zsh"
 
 [window]
