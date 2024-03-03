@@ -15,7 +15,7 @@ local keymaps = {
   { mode = 'n', shortcut = '<C-p>',        fn = ':Telescope git_files<CR>'},
   { mode = 'n', shortcut = '<C-r>',        fn = ':Telescope find_files<CR>'},
   { mode = 'n', shortcut = '<leader>ff',   fn = ':Telescope live_grep<CR>'},
-  { mode = 'n', shortcut = '<leader>fs',   fn = ':Telescope grep_string<CR>'},
+  { mode = 'n', shortcut = '<leader>fs',   fn = ':Telescope lsp_document_symbols<CR>'},
   { mode = 'n', shortcut = '<leader>gc',   fn = ':Telescope git_commits<CR>'},
   { mode = 'n', shortcut = '<leader>gst',  fn = ':Telescope git_status<CR>'},
   { mode = 'n', shortcut = '<leader>gbr',  fn = ':Telescope git_branches<CR>'},

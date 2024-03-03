@@ -21,7 +21,14 @@ mod.setup {
     "vim", 
     "vimdoc", 
     "yaml",
-    "zig"
+    "sql",
+    "zig",
+    "proto",
+    "toml",
+    "git_config",
+    "gitcommit",
+    "gitignore",
+
   },
   sync_install = false,
   auto_install = true,
