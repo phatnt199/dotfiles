@@ -41,7 +41,7 @@ local keymaps = {
   { mode = 'n', shortcut = 'ff',           fn = ':FormatWrite<CR>'},
 
   { mode = 'n', shortcut = '<leader>tn',        fn = ':tabnew<CR>'},
-  { mode = 'n', shortcut = '<leader>tc',        fn = ':tabclose<CR>'},
+  { mode = 'n', shortcut = '<leader>tx',        fn = ':tabclose<CR>'},
 
   { mode = 'i', shortcut = 'jk',           fn = '<Esc>'},
 
