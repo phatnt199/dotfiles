@@ -40,8 +40,8 @@ local keymaps = {
   { mode = 'n', shortcut = 'gr',           fn = ':lua vim.lsp.buf.references()<CR>'},
   { mode = 'n', shortcut = 'ff',           fn = ':FormatWrite<CR>'},
 
-  { mode = 'n', shortcut = '<C-t>',        fn = ':tabnew<CR>'},
-  { mode = 'n', shortcut = '<C-x>',        fn = ':tabclose<CR>'},
+  { mode = 'n', shortcut = '<leader>tn',        fn = ':tabnew<CR>'},
+  { mode = 'n', shortcut = '<leader>tc',        fn = ':tabclose<CR>'},
 
   { mode = 'i', shortcut = 'jk',           fn = '<Esc>'},
 
