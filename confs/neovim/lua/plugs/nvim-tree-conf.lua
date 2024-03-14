@@ -3,9 +3,11 @@ local mod = require('nvim-tree')
 mod.setup({
   disable_netrw = true,
   hijack_netrw = true,
+  hijack_cursor = true,
   open_on_tab = false,
   update_focused_file = {
     enable = true,
+    update_cwd = true,
     ignore_list = {},
   },
   renderer = {
@@ -13,12 +15,12 @@ mod.setup({
       webdev_colors = true,
     },
   },
-  git = { 
-    enable = false, 
-    ignore = false, 
+  git = {
+    enable = false,
+    ignore = false,
     timeout = 400,
   },
-  view = { 
+  view = {
     cursorline = false,
   },
   diagnostics = {
@@ -27,10 +29,10 @@ mod.setup({
     show_on_open_dirs = false,
     debounce_delay = 20,
     icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "✖",
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
     },
   },
 })
