@@ -29,9 +29,9 @@ mod.setup({
     show_on_open_dirs = false,
     debounce_delay = 20,
     icons = {
-      hint = "",
+      hint = "⚉",
       info = "",
-      warning = "",
+      warning = "◼",
       error = "",
     },
   },
