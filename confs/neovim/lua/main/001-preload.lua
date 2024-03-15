@@ -25,7 +25,7 @@ set.fileencoding = 'utf-8'
 set.encoding = 'utf-8'
 
 set.cursorline = true
-set.cursorlineopt = 'number'
+set.cursorlineopt = 'both'
 set.backup = false
 set.writebackup = false
 set.lazyredraw = true

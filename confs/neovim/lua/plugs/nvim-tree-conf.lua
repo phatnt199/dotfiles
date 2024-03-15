@@ -21,7 +21,7 @@ mod.setup({
     timeout = 400,
   },
   view = {
-    cursorline = false,
+    cursorline = true,
   },
   diagnostics = {
     enable = true,
