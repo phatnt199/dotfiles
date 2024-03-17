@@ -61,17 +61,64 @@ local defaultProps = {
         }
       }
     },
+    ['diagnosticls'] = {
+    },
   },
 }
 
-local lsps = {
-  'dartls',
-  'tsserver',
-  'rust_analyzer',
-  'pyright',
-  'sqlls',
+local diagnosticProps = defaultProps
+diagnosticProps['init_options'] = {
+  filetypes = {
+    javascript = "eslint",
+    typescript = "eslint",
+    javascriptreact = "eslint",
+    typescriptreact = "eslint"
+  },
+  linters = {
+    eslint = {
+      sourceName = "eslint",
+      command = "./node_modules/.bin/eslint",
+      rootPatterns = {
+        ".eslintrc.js",
+        ".eslintrc.cjs",
+        ".eslintrc",
+        ".eslintrc.json",
+        "package.json"
+      },
+      debounce = 100,
+      args = {
+        "--cache",
+        "--stdin",
+        "--stdin-filename",
+        "%filepath",
+        "--format",
+        "json"
+      },
+      parseJson = {
+        errorsRoot = "[0].messages",
+        line = "line",
+        column = "column",
+        endLine = "endLine",
+        endColumn = "endColumn",
+        message = "${message} [${ruleId}]",
+        security = "severity"
+      },
+      securities = {
+        [2] = "error",
+        [1] = "warning"
+      }
+    }
+  }
 }
-for index in ipairs(lsps) do
-  local lsp = lsps[index]
-  lspConfig[lsp].setup(defaultProps)
+
+local lsps = {}
+lsps['dartls'] = defaultProps
+lsps['tsserver'] = defaultProps
+lsps['rust_analyzer'] = defaultProps
+lsps['sqlls'] = defaultProps
+lsps['diagnosticls'] = diagnosticProps
+
+for lsp,confs in pairs(lsps) do
+  -- print(lsp, confs)
+  lspConfig[lsp].setup(confs)
 end
