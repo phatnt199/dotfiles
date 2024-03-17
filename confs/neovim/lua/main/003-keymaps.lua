@@ -39,6 +39,7 @@ local keymaps = {
   { mode = 'n', shortcut = '<leader>oi',   fn = ':lua vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })<CR>'},
   { mode = 'n', shortcut = 'gr',           fn = ':lua vim.lsp.buf.references()<CR>'},
   { mode = 'n', shortcut = 'ff',           fn = ':FormatWrite<CR>'},
+  -- { mode = 'n', shortcut = 'ff',           fn = ':lua vim.lsp.buf.format({ async = true })<CR>'},
 
   { mode = 'n', shortcut = '<leader>tn',        fn = ':tabnew<CR>'},
   { mode = 'n', shortcut = '<leader>tx',        fn = ':tabclose<CR>'},

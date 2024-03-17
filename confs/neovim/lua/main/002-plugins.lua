@@ -16,6 +16,8 @@ Plug ('nvim-telescope/telescope.nvim', { branch = '0.1.x' })
 Plug 'nvim-telescope/telescope-media-files.nvim'
 
 Plug 'mhartington/formatter.nvim'
+-- Plug 'jose-elias-alvarez/null-ls.nvim'
+
 Plug ('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'numToStr/Comment.nvim'
