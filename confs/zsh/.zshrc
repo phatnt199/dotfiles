@@ -5,9 +5,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 export WORKSPACE="$HOME/Workspace"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
@@ -61,7 +58,7 @@ ZSH_THEME="robbyrussell"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -100,5 +97,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 eval "$(starship init zsh)"
+
 export FLUTTER_HOME="$WORKSPACE/env/flutter"
 export PATH="$PATH:/home/tanphat199/.local/bin:$FLUTTER_HOME/bin"
+
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --zsh)"
