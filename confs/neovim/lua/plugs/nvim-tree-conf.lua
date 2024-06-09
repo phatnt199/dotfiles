@@ -6,7 +6,7 @@ mod.setup({
   open_on_tab = false,
   update_focused_file = {
     enable = true,
-    update_cwd = true,
+    update_cwd = false,
     ignore_list = {},
   },
   renderer = {
