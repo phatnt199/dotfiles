@@ -12,20 +12,22 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
 Plug 'nvim-lua/plenary.nvim'
+
 Plug ('nvim-telescope/telescope.nvim', { branch = '0.1.x' })
 Plug 'nvim-telescope/telescope-media-files.nvim'
 
 Plug 'mhartington/formatter.nvim'
--- Plug 'jose-elias-alvarez/null-ls.nvim'
 
 Plug ('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'numToStr/Comment.nvim'
+
 Plug 'windwp/nvim-autopairs'
+
+Plug 'tpope/vim-fugitive'
 
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-tree/nvim-tree.lua'
-
 Plug 'nvim-lualine/lualine.nvim'
 
 -- Color Scheme
