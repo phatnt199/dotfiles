@@ -98,8 +98,12 @@ export NVM_DIR="$HOME/.nvm"
 
 eval "$(starship init zsh)"
 
+# Add Flutter to PATH
 export FLUTTER_HOME="$WORKSPACE/env/flutter"
 export PATH="$PATH:/home/tanphat199/.local/bin:$FLUTTER_HOME/bin"
+
+# Add LUA to PATH
+export PATH="$PATH:/home/tanphat199/Workspace/env/lua/lua-main/src"
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
