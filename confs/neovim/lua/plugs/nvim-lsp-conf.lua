@@ -67,10 +67,11 @@ local defaultProps = {
 }
 
 local lsps = {}
-lsps['dartls'] = defaultProps
 lsps['tsserver'] = defaultProps
-lsps['rust_analyzer'] = defaultProps
 lsps['sqlls'] = defaultProps
+lsps['lua_ls'] = defaultProps
+lsps['dartls'] = defaultProps
+lsps['rust_analyzer'] = defaultProps
 
 for lsp,confs in pairs(lsps) do
   lspConfig[lsp].setup(confs)
