@@ -1,11 +1,16 @@
 local keymaps = {
+  { mode = 'i', shortcut = 'jk',           fn = '<Esc>'},
+
   { mode = 'n', shortcut = '<C-s>',        fn = ':w<CR>' },
+
   { mode = 'n', shortcut = '<M-k>',        fn = '<C-y>'},
   { mode = 'n', shortcut = '<M-j>',        fn = '<C-e>'},
   { mode = 'n', shortcut = '<M-h>',        fn = 'zh'},
   { mode = 'n', shortcut = '<M-l>',        fn = 'zl'},
+
   { mode = 'n', shortcut = '<C-z>',        fn = ':undo<CR>'},
   { mode = 'n', shortcut = '<C-y>',        fn = ':redo<CR>'},
+
   { mode = 'n', shortcut = '<C-Up>',       fn = ':resize -2<CR>'},
   { mode = 'n', shortcut = '<C-Down>',     fn = ':resize +2<CR>'},
   { mode = 'n', shortcut = '<leader>rf',   fn = ':luafile %<CR>'},
@@ -38,13 +43,12 @@ local keymaps = {
   { mode = 'n', shortcut = '<leader>ac',   fn = ':lua vim.lsp.buf.code_action()<CR>'},
   { mode = 'n', shortcut = '<leader>oi',   fn = ':lua vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })<CR>'},
   { mode = 'n', shortcut = 'gr',           fn = ':lua vim.lsp.buf.references()<CR>'},
+
   { mode = 'n', shortcut = 'ff',           fn = ':FormatWrite<CR>'},
   -- { mode = 'n', shortcut = 'ff',           fn = ':lua vim.lsp.buf.format({ async = true })<CR>'},
 
   { mode = 'n', shortcut = '<leader>tn',        fn = ':tabnew<CR>'},
   { mode = 'n', shortcut = '<leader>tx',        fn = ':tabclose<CR>'},
-
-  { mode = 'i', shortcut = 'jk',           fn = '<Esc>'},
 
   { mode = 'v', shortcut = 'J',            fn = ':m \'>+1<CR>gv=gv'},
   { mode = 'v', shortcut = 'K',            fn = ':m \'<-2<CR>gv=gv'},
@@ -54,9 +58,8 @@ local keymaps = {
   { mode = 'v', shortcut = '<leader>y',    fn = '\"+y'},
   { mode = 'n', shortcut = '<leader>Y',    fn = '\"+Y'},
 
-  { mode = 'n', shortcut = '<leader>gl',   fn = ':diffget LOCAL'},
-  { mode = 'n', shortcut = '<leader>gb',   fn = ':diffget BASE'},
-  { mode = 'n', shortcut = '<leader>gr',   fn = ':diffget REMOTE'},
+  { mode = 'n', shortcut = ']q',           fn = ':cnext<CR>'},
+  { mode = 'n', shortcut = '[q',           fn = ':cprevious<CR>'},
 }
 
 for index in ipairs(keymaps) do
