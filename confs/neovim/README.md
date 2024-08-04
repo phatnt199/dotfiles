@@ -8,6 +8,8 @@
 
 - ripgrep: https://github.com/BurntSushi/ripgrep
 
+- nvim-lsp: tsserver, prettier, protols, lua_ls, dartls, rust_analyzer
+
 ### Installations:
 
 - Clone this repository to: `~/.config`

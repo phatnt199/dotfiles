@@ -69,6 +69,7 @@ local defaultProps = {
 local lsps = {}
 lsps['tsserver'] = defaultProps
 lsps['sqlls'] = defaultProps
+lsps['protols'] = defaultProps
 lsps['lua_ls'] = defaultProps
 lsps['dartls'] = defaultProps
 lsps['rust_analyzer'] = defaultProps
