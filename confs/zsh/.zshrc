@@ -105,5 +105,8 @@ export PATH="$PATH:/home/tanphat199/.local/bin:$FLUTTER_HOME/bin"
 # Add LUA to PATH
 export PATH="$PATH:$WORKSPACE/env/lua/lua-main/src:$WORKSPACE/env/lua/lsp/bin"
 
+# Add Protobuf to PATH
+export PATH="$PATH:$WORKSPACE/env/protoc/linux/bin"
+
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
