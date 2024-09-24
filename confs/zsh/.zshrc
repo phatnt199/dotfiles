@@ -3,18 +3,21 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export WORKSPACE="$HOME/Workspace"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="af-magic"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+export WORKSPACE="$HOME/Workspace"
+echo "Workspace: $WORKSPACE"
 
-# Uncomment the following line to use case-sensitive completion.
+export WORKSPACE_ENV="$WORKSPACE/env"
+mkdir -p $WORKSPACE/env
+echo "Created default WORKSPACE_ENV: $WORKSPACE/env"
+
+export WORKSPACE_SAVE="$WORKSPACE/save"
+mkdir -p $WORKSPACE/save
+echo "Created default WORKSPACE_SAVE: $WORKSPACE/save"
+
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
@@ -63,11 +66,6 @@ HIST_STAMPS="yyyy-mm-dd"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
@@ -90,25 +88,7 @@ fi
 # export ARCHFLAGS="-arch x86_64"
 alias nv="nvim ."
 alias sa="sudo apt"
-
-# --------------------------------------------------------------------
-# JAVA
-# --------------------------------------------------------------------
-# export JAVA_HOME="$WORKSPACE/env/openjdk/openjdk-21+35_linux-x64"
-export JAVA_HOME="$WORKSPACE/env/openjdk/openjdk-8u422-b05-linux-x64"
-export PATH="$PATH:$JAVA_HOME/bin"
-
-# --------------------------------------------------------------------
-# JAVA LSP
-# --------------------------------------------------------------------
-export PATH="$PATH:$WORKSPACE/env/jdtls/latest/bin"
-
-# --------------------------------------------------------------------
-# ANDROID
-# --------------------------------------------------------------------
-export ANDROID_HOME="$WORKSPACE/env/android/sdk"
-export PATH="$PATH:$ANDROID_HOME/emulator"
-export PATH="$PATH:$ANDROID_HOME/platform-tools"
+alias ws="cd $WORKSPACE"
 
 # --------------------------------------------------------------------
 # NVM
@@ -118,17 +98,36 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # --------------------------------------------------------------------
+# JAVA
+# --------------------------------------------------------------------
+# export JAVA_HOME="$WORKSPACE_ENV/openjdk/openjdk-21+35_linux-x64"
+export JAVA_HOME="$WORKSPACE_ENV/openjdk/openjdk-8u422-b05-linux-x64"
+export PATH="$PATH:$JAVA_HOME/bin"
+
+# --------------------------------------------------------------------
+# JAVA LSP
+# --------------------------------------------------------------------
+export PATH="$PATH:$WORKSPACE_ENV/jdtls/latest/bin"
+
+# --------------------------------------------------------------------
+# ANDROID
+# --------------------------------------------------------------------
+export ANDROID_HOME="$WORKSPACE_ENV/android/sdk"
+export PATH="$PATH:$ANDROID_HOME/emulator"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
+
+# --------------------------------------------------------------------
 # FLUTTER
 # --------------------------------------------------------------------
-export FLUTTER_HOME="$WORKSPACE/env/flutter"
+export FLUTTER_HOME="$WORKSPACE_ENV/flutter"
 export PATH="$PATH:/home/tanphat199/.local/bin:$FLUTTER_HOME/bin"
 
 # --------------------------------------------------------------------
 # LUA LSP
 # --------------------------------------------------------------------
-export PATH="$PATH:$WORKSPACE/env/lua/lua-main/src:$WORKSPACE/env/lua/lsp/bin"
+export PATH="$PATH:$WORKSPACE_ENV/lua/lua-main/src:$WORKSPACE_ENV/lua/lsp/bin"
 
 # --------------------------------------------------------------------
 # PROTOC
 # --------------------------------------------------------------------
-export PATH="$PATH:$WORKSPACE/env/protoc/linux/bin"
+export PATH="$PATH:$WORKSPACE_ENV/protoc/linux/bin"
