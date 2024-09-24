@@ -1,3 +1,3 @@
-local mod = require("nvim-autopairs")
+local mod = require('nvim-autopairs')
 
 mod.setup({})

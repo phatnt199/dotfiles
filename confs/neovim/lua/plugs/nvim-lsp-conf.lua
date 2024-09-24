@@ -4,7 +4,7 @@ local lspConfig = require('lspconfig')
 cmp.setup({
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+      vim.fn['vsnip#anonymous'](args.body)
     end,
   },
   mapping = {
@@ -16,8 +16,8 @@ cmp.setup({
       c = cmp.mapping.close(),
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ["<Tab>"] = cmp.mapping.select_next_item(),
-    ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
@@ -35,7 +35,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(
 local flags = { debounce_text_changes = 150 }
 
 local handlers = {
-  ["textDocument/publishDiagnostics"] = vim.lsp.with(
+  ['textDocument/publishDiagnostics'] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
       virtual_text = false,
       underline = true,
@@ -48,8 +48,21 @@ local defaultProps = {
   capabilities = capabilities,
   flags = flags,
   handlers = handlers,
-  settings = {
-    ['rust-analyzer'] = {
+  settings = {},
+}
+
+local lsps = {
+  ts_ls = defaultProps,
+  sqlls = defaultProps,
+  protols = defaultProps,
+  lua_ls = defaultProps,
+  dartls = defaultProps,
+  rust_analyzer = defaultProps,
+}
+
+for lspName, confs in pairs(lsps) do
+  if lspName == 'rust_analyzer' then
+    confs['settings']['rust_analyzer'] = {
       checkOnSave = {
         overrideCommand = {
           'cargo',
@@ -60,20 +73,18 @@ local defaultProps = {
           '--all-features'
         }
       }
-    },
-    ['diagnosticls'] = {
-    },
-  },
-}
+    }
+  elseif lspName == 'jdtls' then
+    confs['settings']['java'] = {
 
-local lsps = {}
-lsps['tsserver'] = defaultProps
-lsps['sqlls'] = defaultProps
-lsps['protols'] = defaultProps
-lsps['lua_ls'] = defaultProps
-lsps['dartls'] = defaultProps
-lsps['rust_analyzer'] = defaultProps
+    }
+  elseif lspName == 'lua_ls' then
+    confs['settings']['Lua'] = {
+      diagnostics = {
+        globals = { 'vim' },
+      },
+    }
+  end
 
-for lsp,confs in pairs(lsps) do
-  lspConfig[lsp].setup(confs)
+  lspConfig[lspName].setup(confs)
 end

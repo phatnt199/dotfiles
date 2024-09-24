@@ -6,7 +6,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export WORKSPACE="$HOME/Workspace"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="af-magic"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -72,41 +72,63 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+eval "$(starship init zsh)"
+eval "$(fzf --zsh)"
+
 # User configuration
-
 # export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 alias nv="nvim ."
 alias sa="sudo apt"
-alias adb="$WORKSPACE/env/android/sdk/platform-tools/adb"
 
+# --------------------------------------------------------------------
+# JAVA
+# --------------------------------------------------------------------
+# export JAVA_HOME="$WORKSPACE/env/openjdk/openjdk-21+35_linux-x64"
+export JAVA_HOME="$WORKSPACE/env/openjdk/openjdk-8u422-b05-linux-x64"
+export PATH="$PATH:$JAVA_HOME/bin"
+
+# --------------------------------------------------------------------
+# JAVA LSP
+# --------------------------------------------------------------------
+export PATH="$PATH:$WORKSPACE/env/jdtls/latest/bin"
+
+# --------------------------------------------------------------------
+# ANDROID
+# --------------------------------------------------------------------
+export ANDROID_HOME="$WORKSPACE/env/android/sdk"
+export PATH="$PATH:$ANDROID_HOME/emulator"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
+
+# --------------------------------------------------------------------
+# NVM
+# --------------------------------------------------------------------
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-eval "$(starship init zsh)"
-
-# Add Flutter to PATH
+# --------------------------------------------------------------------
+# FLUTTER
+# --------------------------------------------------------------------
 export FLUTTER_HOME="$WORKSPACE/env/flutter"
 export PATH="$PATH:/home/tanphat199/.local/bin:$FLUTTER_HOME/bin"
 
-# Add LUA to PATH
+# --------------------------------------------------------------------
+# LUA LSP
+# --------------------------------------------------------------------
 export PATH="$PATH:$WORKSPACE/env/lua/lua-main/src:$WORKSPACE/env/lua/lsp/bin"
 
-# Add Protobuf to PATH
+# --------------------------------------------------------------------
+# PROTOC
+# --------------------------------------------------------------------
 export PATH="$PATH:$WORKSPACE/env/protoc/linux/bin"
-
-# Set up fzf key bindings and fuzzy completion
-eval "$(fzf --zsh)"

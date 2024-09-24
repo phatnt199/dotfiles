@@ -28,10 +28,10 @@ mod.setup({
     show_on_open_dirs = false,
     debounce_delay = 20,
     icons = {
-      hint = "⚉",
-      info = "",
-      warning = "◼",
-      error = "",
+      hint = '⚉',
+      info = '',
+      warning = '◼',
+      error = '',
     },
   },
 })
