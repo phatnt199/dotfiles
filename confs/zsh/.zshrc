@@ -8,15 +8,8 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="af-magic"
 
 export WORKSPACE="$HOME/Workspace"
-echo "Workspace: $WORKSPACE"
-
 export WORKSPACE_ENV="$WORKSPACE/env"
-mkdir -p $WORKSPACE/env
-echo "Created default WORKSPACE_ENV: $WORKSPACE/env"
-
 export WORKSPACE_SAVE="$WORKSPACE/save"
-mkdir -p $WORKSPACE/save
-echo "Created default WORKSPACE_SAVE: $WORKSPACE/save"
 
 # CASE_SENSITIVE="true"
 
