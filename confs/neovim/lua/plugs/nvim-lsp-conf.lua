@@ -1,34 +1,11 @@
-local cmp = require('cmp')
-
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
-  mapping = {
-    ['<C-k>'] = cmp.mapping(cmp.mapping.scroll_docs(-2), { 'i', 'c' }),
-    ['<C-j>'] = cmp.mapping(cmp.mapping.scroll_docs(2), { 'i', 'c' }),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
-    ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-    ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  },
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-    { name = 'path' },
-    { name = 'cmdline' }
-  }, {
-    { name = 'buffer' }
-  })
-})
-
------------------------------------------------------------------------------------
 local lspConfig = require('lspconfig')
 local cmpLsp = require('cmp_nvim_lsp')
 local utilities = require('utilities.index');
+
+local workspaceEnvFolder = os.getenv('WORKSPACE_ENV');
+if workspaceEnvFolder == nil then
+  workspaceEnvFolder = os.getenv('HOME') .. '/Workspace/env'
+end
 
 local defaultProps = {
   capabilities = cmpLsp.default_capabilities(
@@ -48,17 +25,23 @@ local defaultProps = {
   },
 }
 
-local workspaceEnvFolder = os.getenv('WORKSPACE_ENV');
-if workspaceEnvFolder == nil then
-  workspaceEnvFolder = os.getenv('HOME') .. '/Workspace/env'
-end
-
 local lsps = {
+  -- Typescript/Javascript
   ts_ls = defaultProps,
+
+  -- SQL
   sqlls = defaultProps,
+
+  -- Proto
   protols = defaultProps,
+
+  -- Dart
   dartls = defaultProps,
+
+  -- Bash/Shell
   bashls = defaultProps,
+
+  -- Lua
   lua_ls = utilities.merge_tables({
     settings = {
       ['Lua'] = {
@@ -68,6 +51,8 @@ local lsps = {
       },
     },
   }, defaultProps),
+
+-- Rust
   rust_analyzer = utilities.merge_tables({
     settings = {
       ['rust_analyzer'] = {
@@ -84,6 +69,8 @@ local lsps = {
       },
     },
   }, defaultProps),
+
+  -- Java
   jdtls = utilities.merge_tables({
     cmd = {
       'java',
