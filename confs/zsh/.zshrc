@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -84,6 +81,17 @@ alias sa="sudo apt"
 alias ws="cd $WORKSPACE"
 
 # --------------------------------------------------------------------
+append_path () {
+  if [ ! -z $TMUX ]; then
+    return
+  fi
+
+  export PATH="$PATH:$1"
+}
+
+append_path "$HOME/.local/bin"
+
+# --------------------------------------------------------------------
 # NVM
 # --------------------------------------------------------------------
 export NVM_DIR="$HOME/.nvm"
@@ -93,33 +101,30 @@ export NVM_DIR="$HOME/.nvm"
 # --------------------------------------------------------------------
 # JAVA
 # --------------------------------------------------------------------
-# export JAVA_HOME="$WORKSPACE_ENV/openjdk/openjdk-21+35_linux-x64"
-export JAVA_HOME="$WORKSPACE_ENV/openjdk/openjdk-8u422-b05-linux-x64"
-export PATH="$PATH:$JAVA_HOME/bin"
-
-# --------------------------------------------------------------------
-# JAVA LSP
-# --------------------------------------------------------------------
-export PATH="$PATH:$WORKSPACE_ENV/jdtls/latest/bin"
+export JAVA_HOME="$WORKSPACE_ENV/openjdk/openjdk-21+35_linux-x64"
+append_path "$JAVA_HOME/bin" # Java bin
+append_path "$WORKSPACE_ENV/jdtls/latest/bin" # Java LSP
 
 # --------------------------------------------------------------------
 # ANDROID
 # --------------------------------------------------------------------
 export ANDROID_HOME="$WORKSPACE_ENV/android/sdk"
-export PATH="$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools"
+append_path "$ANDROID_HOME/emulator"
+append_path "$ANDROID_HOME/platform-tools"
 
 # --------------------------------------------------------------------
 # FLUTTER
 # --------------------------------------------------------------------
 export FLUTTER_HOME="$WORKSPACE_ENV/flutter"
-export PATH="$PATH:/home/tanphat199/.local/bin:$FLUTTER_HOME/bin"
+append_path "$FLUTTER_HOME/bin"
 
 # --------------------------------------------------------------------
 # LUA LSP
 # --------------------------------------------------------------------
-export PATH="$PATH:$WORKSPACE_ENV/lua/lua-main/src:$WORKSPACE_ENV/lua/lsp/bin"
+append_path "$WORKSPACE_ENV/lua/lua-main/src"
+append_path "$WORKSPACE_ENV/lua/lsp/bin"
 
 # --------------------------------------------------------------------
 # PROTOC
 # --------------------------------------------------------------------
-export PATH="$PATH:$WORKSPACE_ENV/protoc/linux/bin"
+append_path "$WORKSPACE_ENV/protoc/linux/bin"
