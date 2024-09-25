@@ -2,35 +2,47 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '~/.config/nvim/plugged')
 
+-- Plugin Utilities
 Plug ('nvim-lua/plenary.nvim')
 
+-- LSP
+Plug ('neovim/nvim-lspconfig')
+
+-- CMP
 Plug ('hrsh7th/cmp-nvim-lsp')
 Plug ('hrsh7th/cmp-buffer')
 Plug ('hrsh7th/cmp-path')
 Plug ('hrsh7th/cmp-cmdline')
-Plug ('L3MON4D3/LuaSnip', { tag = 'v2.*', ['do'] = 'make install_jsregexp' })
-Plug ('saadparwaiz1/cmp_luasnip')
+Plug ('hrsh7th/cmp-vsnip')
+Plug ('hrsh7th/vim-vsnip')
 Plug ('hrsh7th/nvim-cmp')
 
-Plug ('neovim/nvim-lspconfig')
+-- Explorer
+Plug ('nvim-tree/nvim-web-devicons')
+Plug ('nvim-tree/nvim-tree.lua')
 
+-- Finder
 Plug ('nvim-telescope/telescope.nvim', { branch = '0.1.x' })
 Plug ('nvim-telescope/telescope-media-files.nvim')
 
+-- Status
+Plug ('nvim-lualine/lualine.nvim')
+
+-- Formatter
 Plug ('mhartington/formatter.nvim')
 
-Plug ('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
-
+-- Comment
 Plug ('JoosepAlviste/nvim-ts-context-commentstring')
 Plug ('numToStr/Comment.nvim')
 
+-- Pairs
 Plug ('windwp/nvim-autopairs')
 
+-- Git
 Plug ('tpope/vim-fugitive')
 
-Plug ('nvim-tree/nvim-web-devicons')
-Plug ('nvim-tree/nvim-tree.lua')
-Plug ('nvim-lualine/lualine.nvim')
+-- Syntax Highlight
+Plug ('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 
 -- Color Scheme
 Plug ('lilydjwg/colorizer')

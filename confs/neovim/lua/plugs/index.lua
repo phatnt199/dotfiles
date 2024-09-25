@@ -1,4 +1,4 @@
-require('plugs.colorscheme-conf')
+require('plugs.theme-conf')
 require('plugs.nvim-cmp-conf')
 require('plugs.nvim-lsp-conf')
 require('plugs.lualine-conf')
