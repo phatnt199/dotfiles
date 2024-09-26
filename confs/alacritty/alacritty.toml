@@ -96,3 +96,6 @@ y = 0
 [window.position]
 x = 0
 y = 0
+
+[env]
+TERM = "alacritty-direct"
