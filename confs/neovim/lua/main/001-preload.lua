@@ -54,7 +54,6 @@ set.shortmess:append { c = true }
 
 local diabled_providers = {
   'python3',
-  'node',
   'perl',
   'ruby',
 }

@@ -63,18 +63,19 @@ style = "Regular"
 x = 0
 y = 0
 
-[[keyboard.bindings]]
-action = "SpawnNewInstance"
-key = "N"
-mods = "Control|Shift"
+[keyboard]
+bindings = [
+  { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
+  { key = "V", mods = "Alt|Shift", action = "ToggleViMode" },
+]
 
 [scrolling]
-history = 8000
+history = 10000
 multiplier = 4
 
 [shell]
-# args = ["-c", "tmux"]
 program = "/bin/zsh"
+args = ["-l"]
 
 [window]
 decorations = "full"
@@ -96,6 +97,3 @@ y = 0
 [window.position]
 x = 0
 y = 0
-
-[env]
-TERM = "alacritty-direct"
