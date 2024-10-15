@@ -101,7 +101,7 @@ export NVM_DIR="$HOME/.nvm"
 # --------------------------------------------------------------------
 # JAVA
 # --------------------------------------------------------------------
-export JAVA_HOME="$WORKSPACE_ENV/openjdk/openjdk-21+35_linux-x64"
+export JAVA_HOME="$WORKSPACE_ENV/openjdk/openjdk-17.0.12+7-linux-x64"
 append_path "$JAVA_HOME/bin" # Java bin
 append_path "$WORKSPACE_ENV/jdtls/latest/bin" # Java LSP
 
