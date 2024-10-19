@@ -53,6 +53,7 @@ set.completeopt = {
 set.shortmess:append { c = true }
 
 local diabled_providers = {
+  'neovim',
   'python3',
   'perl',
   'ruby',

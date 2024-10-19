@@ -73,7 +73,7 @@ bindings = [
 history = 10000
 multiplier = 4
 
-[shell]
+[terminal.shell]
 program = "/bin/zsh"
 args = ["-l"]
 
@@ -97,3 +97,5 @@ y = 0
 [window.position]
 x = 0
 y = 0
+
+[terminal]
