@@ -16,6 +16,8 @@ mod.setup({
     'json',
     'json5',
     'lua',
+    'markdown',
+    'markdown_inline',
     'rust',
     'tsx',
     'typescript',

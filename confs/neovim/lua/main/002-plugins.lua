@@ -43,6 +43,7 @@ Plug ('tpope/vim-fugitive')
 
 -- Syntax Highlight
 Plug ('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
+Plug ('OXY2DEV/markview.nvim')
 
 -- Color Scheme
 Plug ('lilydjwg/colorizer')
