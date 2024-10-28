@@ -2,7 +2,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="af-magic"
+ZSH_THEME="intheloop"
 
 export WORKSPACE="$HOME/Workspace"
 export WORKSPACE_ENV="$WORKSPACE/env"
@@ -56,11 +56,19 @@ HIST_STAMPS="yyyy-mm-dd"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-plugins=(git)
+plugins=(
+  fzf
+  git
+  dotenv
+
+  flutter
+  node
+  thefuck
+)
 
 source $ZSH/oh-my-zsh.sh
 
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
 eval "$(fzf --zsh)"
 
 # User configuration
@@ -86,6 +94,7 @@ append_path () {
     return
   fi
 
+  # echo "Append: $1"
   export PATH="$PATH:$1"
 }
 
@@ -131,3 +140,8 @@ append_path "$WORKSPACE_ENV/lua/lsp/bin"
 # PROTOC
 # --------------------------------------------------------------------
 append_path "$WORKSPACE_ENV/protoc/linux/bin"
+
+# --------------------------------------------------------------------
+# PG_FORMAT
+# --------------------------------------------------------------------
+append_path "$WORKSPACE_ENV/pgFormatter"

@@ -20,13 +20,13 @@ mod.setup({
       require('formatter.filetypes.javascriptreact').prettier,
     },
     json = {
-      require('formatter.filetypes.json').prettier ,
+      require('formatter.filetypes.json').prettier,
     },
     lua = {
-      require('formatter.filetypes.lua').stylua ,
+      require('formatter.filetypes.lua').stylua,
     },
     markdown = {
-      require('formatter.filetypes.markdown').prettier ,
+      require('formatter.filetypes.markdown').prettier,
     },
     python = {
       require('formatter.filetypes.python').autopep8,

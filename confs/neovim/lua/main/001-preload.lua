@@ -54,6 +54,7 @@ set.shortmess:append { c = true }
 
 local diabled_providers = {
   'neovim',
+  'node',
   'python3',
   'perl',
   'ruby',
