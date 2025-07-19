@@ -87,6 +87,7 @@ fi
 alias nv="nvim ."
 alias sa="sudo apt"
 alias ws="cd $WORKSPACE"
+alias python="python3"
 
 # --------------------------------------------------------------------
 append_path () {
