@@ -1,8 +1,8 @@
 local set = vim.opt
 local g = vim.g
 
-set.encoding = 'utf-8'
-set.fileencoding = 'utf-8'
+set.encoding = "utf-8"
+set.fileencoding = "utf-8"
 
 set.expandtab = true
 set.smarttab = true
@@ -27,7 +27,7 @@ set.splitright = true
 set.wrap = false
 
 set.cursorline = true
-set.cursorlineopt = 'both'
+set.cursorlineopt = "both"
 set.backup = false
 set.writebackup = false
 set.lazyredraw = true
@@ -38,27 +38,27 @@ set.hidden = true
 set.secure = true
 
 set.scrolloff = 8
-set.signcolumn = 'yes'
+set.signcolumn = "yes"
 set.termguicolors = true
-set.background = 'dark'
-set.fillchars = 'vert:│'
-set.clipboard = 'unnamedplus'
+set.background = "dark"
+set.fillchars = "vert:│"
+set.clipboard = "unnamedplus"
 
 set.completeopt = {
-  'menuone',
-  'noselect',
-  'noinsert',
+	"menuone",
+	"noselect",
+	"noinsert",
 }
 
-set.shortmess:append { c = true }
+set.shortmess:append({ c = true })
 
 local diabled_providers = {
-  'neovim',
-  'node',
-  'python3',
-  'perl',
-  'ruby',
+	"neovim",
+	"node",
+	"python3",
+	"perl",
+	"ruby",
 }
 for index in ipairs(diabled_providers) do
-  g[string.format("loaded_%s_provider", diabled_providers[index])] = 0
+	g[string.format("loaded_%s_provider", diabled_providers[index])] = 0
 end
