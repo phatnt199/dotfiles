@@ -98,6 +98,22 @@ local lsps = {
 			["java"] = {},
 		},
 	}, defaultProps),
+
+	-- Lua
+	yamlls = utilities.merge_tables({
+		settings = {
+			yaml = {
+				schemas = {
+					kubernetes = "*.yml,*.yaml", -- or a more specific pattern like "*.k8s.yaml"
+				},
+				-- Optional: configure schemaStore if you want to use a local or specific schema
+				-- schemaStore = {
+				--     enable = true,
+				--     url = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.20.5-standalone-strict/all.json",
+				-- },
+			},
+		},
+	}, defaultProps),
 }
 
 for name, confs in pairs(lsps) do
