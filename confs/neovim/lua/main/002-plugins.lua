@@ -46,6 +46,7 @@ Plug("github/copilot.vim")
 -- Syntax Highlight
 Plug("OXY2DEV/markview.nvim")
 Plug("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
+Plug("nvim-treesitter/nvim-treesitter-context")
 
 -- Color Scheme
 Plug("lilydjwg/colorizer")
