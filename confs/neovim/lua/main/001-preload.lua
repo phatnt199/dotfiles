@@ -44,21 +44,11 @@ set.background = "dark"
 set.fillchars = "vert:│"
 set.clipboard = "unnamedplus"
 
-set.completeopt = {
-	"menuone",
-	"noselect",
-	"noinsert",
-}
+set.completeopt = { "menuone", "noselect", "noinsert" }
 
 set.shortmess:append({ c = true })
 
-local diabled_providers = {
-	"neovim",
-	"node",
-	"python3",
-	"perl",
-	"ruby",
-}
+local diabled_providers = { "neovim", "node", "python3", "perl", "ruby" }
 for index in ipairs(diabled_providers) do
 	g[string.format("loaded_%s_provider", diabled_providers[index])] = 0
 end
