@@ -1,17 +1,10 @@
-local mod = {
-	"numToStr/Comment.nvim",
-	dependencies = {
-		"JoosepAlviste/nvim-ts-context-commentstring",
-	},
-	config = function()
-		require("ts_context_commentstring").setup({
-			enable_autocmd = false,
-		})
+local mod = require('Comment')
+local xCs = require('ts_context_commentstring.integrations.comment_nvim')
 
-		require("Comment").setup({
-			pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-		})
-	end,
-}
+require('ts_context_commentstring').setup({
+  enable_autocmd = false,
+})
 
-return mod
+mod.setup({
+  pre_hook = xCs.create_pre_hook(),
+})
