@@ -40,9 +40,6 @@ Plug("numToStr/Comment.nvim")
 -- Pairs
 Plug("windwp/nvim-autopairs")
 
--- AI Integration
-Plug("github/copilot.vim")
-
 -- Syntax Highlight
 Plug("OXY2DEV/markview.nvim")
 Plug("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
