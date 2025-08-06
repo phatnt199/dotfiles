@@ -5,11 +5,10 @@ local mod = {
 	-- For `nvim-treesitter` users.
 	priority = 49,
 
-	-- For blink.cmp's completion
-	-- source
-	-- dependencies = {
-	--     "saghen/blink.cmp"
-	-- },
+	-- For blink.cmp's completion source
+	dependencies = {
+		"saghen/blink.cmp",
+	},
 	opts = {
 		hybrid_mode = { "n" },
 	},
