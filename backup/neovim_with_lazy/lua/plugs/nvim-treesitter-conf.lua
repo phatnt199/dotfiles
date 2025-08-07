@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: missing-fields
 local mod = {
 	"nvim-treesitter/nvim-treesitter",
 	branch = "master",
@@ -5,7 +6,6 @@ local mod = {
 	lazy = false,
 	build = ":TSUpdate",
 	config = function()
-		---@diagnostic disable-next-line: missing-fields
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {
 				"c",

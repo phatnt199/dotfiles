@@ -3,7 +3,7 @@ confs/neovim/plugged/*
 ./confs/neovim/plugged
 ./confs/neovim/plugged/*
 
-backup/*/neovim/plugged
-backup/*/neovim/plugged/*
-./backup/*/neovim/plugged
-./backup/*/neovim/plugged/*
+backup/**/*/plugged
+backup/**/*/plugged/*
+./backup/**/*/plugged
+./backup/**/*/plugged/*
