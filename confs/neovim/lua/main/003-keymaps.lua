@@ -28,24 +28,104 @@ local keymaps = {
 	{ mode = "n", shortcut = "]q", fn = ":cnext<CR>" },
 	{ mode = "n", shortcut = "[q", fn = ":cprevious<CR>" },
 
-	{ mode = "n", shortcut = "<space>e", fn = ":lua vim.diagnostic.open_float()<CR>" },
-	{ mode = "n", shortcut = "]d", fn = ":lua vim.diagnostic.goto_next()<CR>" },
-	{ mode = "n", shortcut = "[d", fn = ":lua vim.diagnostic.goto_prev()<CR>" },
-	{ mode = "n", shortcut = "<space>q", fn = ":lua vim.diagnostic.setloclist()<CR>" },
-	{ mode = "n", shortcut = "gD", fn = ":lua vim.lsp.buf.declaration()<CR>" },
-	{ mode = "n", shortcut = "gd", fn = ":lua vim.lsp.buf.definition()<CR>" },
-	{ mode = "n", shortcut = "K", fn = ":lua vim.lsp.buf.hover()<CR>" },
-	{ mode = "n", shortcut = "gi", fn = ":lua vim.lsp.buf.implementation()<CR>" },
-	{ mode = "n", shortcut = "<C-k>", fn = ":lua vim.lsp.buf.signature_help()<CR>" },
-	{ mode = "n", shortcut = "<leader>D", fn = ":lua vim.lsp.buf.type_definition()<CR>" },
-	{ mode = "n", shortcut = "<leader>rn", fn = ":lua vim.lsp.buf.rename()<CR>" },
-	{ mode = "n", shortcut = "<leader>ac", fn = ":lua vim.lsp.buf.code_action()<CR>" },
+	{
+		mode = "n",
+		shortcut = "<space>e",
+		fn = function()
+			vim.diagnostic.open_float()
+		end,
+	},
+	{
+		mode = "n",
+		shortcut = "]d",
+		fn = function()
+			vim.diagnostic.jump({ count = 1, float = true })
+		end,
+	},
+	{
+		mode = "n",
+		shortcut = "[d",
+		fn = function()
+			vim.diagnostic.jump({ count = -1, float = true })
+		end,
+	},
+	{
+		mode = "n",
+		shortcut = "<space>q",
+		fn = function()
+			vim.diagnostic.setloclist()
+		end,
+	},
+	{
+		mode = "n",
+		shortcut = "gD",
+		fn = function()
+			vim.lsp.buf.declaration()
+		end,
+	},
+	{
+		mode = "n",
+		shortcut = "gd",
+		fn = function()
+			vim.lsp.buf.definition()
+		end,
+	},
+	{
+		mode = "n",
+		shortcut = "K",
+		fn = function()
+			vim.lsp.buf.hover()
+		end,
+	},
+	{
+		mode = "n",
+		shortcut = "gi",
+		fn = function()
+			vim.lsp.buf.implementation()
+		end,
+	},
+	{
+		mode = "n",
+		shortcut = "<C-k>",
+		fn = function()
+			vim.lsp.buf.signature_help()
+		end,
+	},
+	{
+		mode = "n",
+		shortcut = "<leader>D",
+		fn = function()
+			vim.lsp.buf.type_definition()
+		end,
+	},
+	{
+		mode = "n",
+		shortcut = "<leader>rn",
+		fn = function()
+			vim.lsp.buf.rename()
+		end,
+	},
+	{
+		mode = "n",
+		shortcut = "<leader>ac",
+		fn = function()
+			vim.lsp.buf.code_action()
+		end,
+	},
 	{
 		mode = "n",
 		shortcut = "<leader>oi",
-		fn = ':lua vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })<CR>',
+		fn = function()
+			vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
+		end,
 	},
-	{ mode = "n", shortcut = "gr", fn = ":lua vim.lsp.buf.references()<CR>" },
+	{
+		mode = "n",
+		shortcut = "gr",
+		fn = function()
+			vim.lsp.buf.references()
+		end,
+	},
 
 	----------------------------------------------------------------------------------------
 	{ mode = "n", shortcut = "<leader>ts", fn = ":Telescope<CR>" },
