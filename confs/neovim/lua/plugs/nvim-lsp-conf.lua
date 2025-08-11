@@ -1,11 +1,51 @@
 local mod = {
 	"neovim/nvim-lspconfig",
 	dependencies = {
-		"saghen/blink.cmp",
+		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-cmdline",
+		"hrsh7th/nvim-cmp",
+
+		"hrsh7th/cmp-vsnip",
+		"hrsh7th/vim-vsnip",
 	},
 	config = function()
+		------------------------------------------------------------------------------------------------------------
+		local cmp = require("cmp")
+
+		cmp.setup({
+			snippet = {
+				expand = function(args)
+					vim.snippet.expand(args.body)
+				end,
+			},
+			window = {
+				completion = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered(),
+			},
+			mapping = {
+				["<C-k>"] = cmp.mapping(cmp.mapping.scroll_docs(-2), { "i", "c" }),
+				["<C-j>"] = cmp.mapping(cmp.mapping.scroll_docs(2), { "i", "c" }),
+				["<C-Space>"] = cmp.mapping.complete(),
+				["<C-e>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
+				["<CR>"] = cmp.mapping.confirm({ select = true }),
+				["<Tab>"] = cmp.mapping.select_next_item(),
+				["<S-Tab>"] = cmp.mapping.select_prev_item(),
+			},
+			sources = cmp.config.sources({
+				{ name = "nvim_lsp" },
+				{ name = "nvim_lua" },
+				{ name = "path" },
+				{ name = "vsnip" },
+			}, {
+				{ name = "buffer" },
+			}),
+		})
+
+		------------------------------------------------------------------------------------------------------------
 		local lspConfig = require("lspconfig")
-		local blinkCmp = require("blink.cmp")
+		local cmpLsp = require("cmp_nvim_lsp")
 		local utilities = require("utilities.index")
 
 		local workspaceEnvFolder = os.getenv("WORKSPACE_ENV")
@@ -14,7 +54,7 @@ local mod = {
 		end
 
 		local defaultProps = {
-			capabilities = blinkCmp.get_lsp_capabilities(),
+			capabilities = cmpLsp.default_capabilities(vim.lsp.protocol.make_client_capabilities()),
 			flags = { debounce_text_changes = 250 },
 			handlers = {
 				["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
