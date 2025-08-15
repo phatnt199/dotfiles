@@ -2,13 +2,13 @@ local keymaps = {
 	{ mode = "i", shortcut = "jk", fn = "<Esc>" },
 	{ mode = "n", shortcut = "<C-s>", fn = ":w<CR>" },
 
-	{ mode = "n", shortcut = "<M-k>", fn = "<C-y>" },
-	{ mode = "n", shortcut = "<M-j>", fn = "<C-e>" },
-	{ mode = "n", shortcut = "<M-h>", fn = "zh" },
-	{ mode = "n", shortcut = "<M-l>", fn = "zl" },
+	{ mode = "n", shortcut = "<A-k>", fn = "<C-y>" },
+	{ mode = "n", shortcut = "<A-j>", fn = "<C-e>" },
+	{ mode = "n", shortcut = "<A-h>", fn = "zh" },
+	{ mode = "n", shortcut = "<A-l>", fn = "zl" },
 
-	{ mode = "n", shortcut = "<C-z>", fn = ":undo<CR>" },
-	{ mode = "n", shortcut = "<C-y>", fn = ":redo<CR>" },
+	-- { mode = "n", shortcut = "<C-z>", fn = ":undo<CR>" },
+	{ mode = "n", shortcut = "<S-u>", fn = ":redo<CR>" },
 
 	{ mode = "n", shortcut = "<C-Up>", fn = ":resize -2<CR>" },
 	{ mode = "n", shortcut = "<C-Down>", fn = ":resize +2<CR>" },
@@ -17,8 +17,8 @@ local keymaps = {
 	{ mode = "n", shortcut = "<leader>tn", fn = ":tabnew<CR>" },
 	{ mode = "n", shortcut = "<leader>tx", fn = ":tabclose<CR>" },
 
-	{ mode = "v", shortcut = "J", fn = ":m '>+1<CR>gv=gv" },
-	{ mode = "v", shortcut = "K", fn = ":m '<-2<CR>gv=gv" },
+	{ mode = "v", shortcut = "<A-S-j>", fn = ":m '>+1<CR>gv=gv" },
+	{ mode = "v", shortcut = "<A-S-k>", fn = ":m '<-2<CR>gv=gv" },
 
 	{ mode = "x", shortcut = "<leader>p", fn = '"_dP' },
 	{ mode = "n", shortcut = "<leader>y", fn = '"+y' },
