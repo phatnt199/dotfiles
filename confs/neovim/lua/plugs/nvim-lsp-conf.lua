@@ -102,6 +102,9 @@ local mod = {
 			-- Dart
 			dartls = defaultProps,
 
+			-- Python
+			pyright = defaultProps,
+
 			-- Bash/Shell
 			bashls = defaultProps,
 

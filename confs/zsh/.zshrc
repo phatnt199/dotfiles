@@ -87,7 +87,6 @@ fi
 alias nv="nvim ."
 alias sa="sudo apt"
 alias ws="cd $WORKSPACE"
-alias python="python3"
 alias "\e"="spf"
 
 # --------------------------------------------------------------------
@@ -147,3 +146,11 @@ append_path "$WORKSPACE_ENV/protoc/linux/bin"
 # PG_FORMAT
 # --------------------------------------------------------------------
 append_path "$WORKSPACE_ENV/pgFormatter"
+
+# --------------------------------------------------------------------
+# PYENV
+# --------------------------------------------------------------------
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
+eval "$(pyenv virtualenv-init -)"
