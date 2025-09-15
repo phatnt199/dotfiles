@@ -103,7 +103,9 @@ local mod = {
 			dartls = defaultProps,
 
 			-- Python
-			pyright = defaultProps,
+			pyright = utilities.merge_tables({
+				settings = {},
+			}, defaultProps),
 
 			-- Bash/Shell
 			bashls = defaultProps,
@@ -185,6 +187,8 @@ local mod = {
 
 		for name, confs in pairs(lsps) do
 			lspConfig[name].setup(confs)
+			-- vim.lsp.config(name, confs)
+			-- vim.lsp.enable(name)
 		end
 	end,
 }

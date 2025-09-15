@@ -17,7 +17,7 @@ local mod = {
 				html = { "prettier" },
 
 				java = { "clang-format" },
-				python = { "isort", "black" },
+				python = { "ruff_fix", "ruff_format" },
 				sh = { "shfmt" },
 				sql = { "pg_format" },
 				toml = { "taplo" },
