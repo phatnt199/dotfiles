@@ -44,7 +44,7 @@ local mod = {
 		})
 
 		------------------------------------------------------------------------------------------------------------
-		local lspConfig = require("lspconfig")
+		-- local lspConfig = require("lspconfig")
 		local cmpLsp = require("cmp_nvim_lsp")
 		local utilities = require("utilities.index")
 
@@ -104,7 +104,17 @@ local mod = {
 
 			-- Python
 			pyright = utilities.merge_tables({
-				settings = {},
+				settings = {
+					python = {
+						analysis = {
+							autoSearchPaths = true,
+							diagnosticMode = "openFilesOnly",
+							useLibraryCodeForTypes = true,
+							autoImportCompletions = true,
+							typeCheckingMode = "standard",
+						},
+					},
+				},
 			}, defaultProps),
 
 			-- Bash/Shell
@@ -186,9 +196,9 @@ local mod = {
 		}
 
 		for name, confs in pairs(lsps) do
-			lspConfig[name].setup(confs)
-			-- vim.lsp.config(name, confs)
-			-- vim.lsp.enable(name)
+			-- lspConfig[name].setup(confs)
+			vim.lsp.enable(name)
+			vim.lsp.config(name, confs)
 		end
 	end,
 }
