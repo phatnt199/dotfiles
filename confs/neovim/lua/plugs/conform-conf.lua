@@ -16,7 +16,7 @@ local mod = {
 				markdown = { "prettier" },
 				html = { "prettier" },
 
-				java = { "clang-format" },
+				-- java = { "clang-format" },  -- Use LSP (jdtls) formatter instead via lsp_format fallback
 				python = { "ruff_fix", "ruff_format" },
 				sh = { "shfmt" },
 				sql = { "pg_format" },

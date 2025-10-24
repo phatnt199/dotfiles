@@ -20,9 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
 require("lazy").setup({
-	spec = {
-		{ import = "plugs" },
-	},
+	spec = { { import = "plugs" } },
 	install = { colorscheme = { "devglow" } },
-	checker = { enabled = true },
+	checker = { enabled = false },
 })

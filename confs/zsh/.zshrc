@@ -109,6 +109,20 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # --------------------------------------------------------------------
+# BUM
+# --------------------------------------------------------------------
+export BUM_HOME="$HOME/.bum"
+append_path "$BUM_HOME/bin"
+append_path "$BUM_HOME/bun-versions/1.2.23"
+
+# bun completions
+[ -s "/home/tanphat199/.bun/_bun" ] && source "/home/tanphat199/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# --------------------------------------------------------------------
 # JAVA
 # --------------------------------------------------------------------
 export JAVA_HOME="$WORKSPACE_ENV/openjdk/openjdk-17.0.12+7-linux-x64"
@@ -124,6 +138,14 @@ append_path "$ANDROID_HOME/platform-tools"
 append_path "$ANDROID_HOME/cmdline-tools/latest/bin"
 append_path "$ANDROID_HOME/tools"
 append_path "$ANDROID_HOME/tools/bin"
+
+# --------------------------------------------------------------------
+# GO
+# --------------------------------------------------------------------
+export GO_HOME="$WORKSPACE_ENV/go"
+export GOPATH="$GO_HOME/packages"
+append_path "$GO_HOME/main/bin"
+append_path "$GOPATH/bin"
 
 # --------------------------------------------------------------------
 # FLUTTER
