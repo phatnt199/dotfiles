@@ -8,6 +8,10 @@ export WORKSPACE="$HOME/Workspace"
 export WORKSPACE_ENV="$WORKSPACE/env"
 export WORKSPACE_SAVE="$WORKSPACE/save"
 
+export SD_PATH="/media/tanphat199/PNT_S1"
+export SD_WORKSPACE_ENV="$SD_PATH/env"
+export SD_WORKSPACE_SAVE="$SD_PATH/save"
+
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
@@ -60,10 +64,6 @@ plugins=(
   fzf
   git
   dotenv
-
-  flutter
-  node
-  thefuck
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -168,3 +168,11 @@ append_path "$WORKSPACE_ENV/protoc/linux/bin"
 # PG_FORMAT
 # --------------------------------------------------------------------
 append_path "$WORKSPACE_ENV/pgFormatter"
+
+# --------------------------------------------------------------------
+# OLLAMA
+# --------------------------------------------------------------------
+export OLLAMA_HOME="$SD_WORKSPACE_ENV/ollama"
+export OLLAMA_MODELS="/mnt/pnt_s1/env/ollama/models"
+append_path "$OLLAMA_HOME/bin"
+

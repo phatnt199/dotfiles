@@ -103,7 +103,13 @@ local mod = {
 
 		local lsps = {
 			-- Typescript/Javascript
-			ts_ls = defaultProps,
+			ts_ls = utilities.merge_tables({
+				cmd = {
+					-- os.getenv("HOME") .. "/.local/bin/typescript-language-server-bun",
+					vim.fn.stdpath("config") .. "/lang-servers/typescript-language-server-bun",
+					"--stdio",
+				},
+			}, defaultProps),
 
 			-- SQL
 			sqlls = defaultProps,
@@ -327,7 +333,6 @@ local mod = {
 		}
 
 		for name, confs in pairs(lsps) do
-			-- lspConfig[name].setup(confs)
 			vim.lsp.enable(name)
 			vim.lsp.config(name, confs)
 		end

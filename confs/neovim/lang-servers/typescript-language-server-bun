@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Create a temporary directory for our custom 'node' wrapper
+WRAPPER_DIR=$(mktemp -d)
+trap "rm -rf $WRAPPER_DIR" EXIT
+
+# Create a 'node' wrapper that actually calls bun
+cat > "$WRAPPER_DIR/node" << 'EOF'
+#!/usr/bin/env bash
+exec bun "$@"
+EOF
+chmod +x "$WRAPPER_DIR/node"
+
+# Add our wrapper directory to PATH so tsserver finds our 'node'
+export PATH="$WRAPPER_DIR:$PATH"
+
+# Run the real typescript-language-server
+exec ~/.bun/bin/typescript-language-server "$@"

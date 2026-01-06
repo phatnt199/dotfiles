@@ -67,6 +67,7 @@ y = 0
 bindings = [
   { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
   { key = "V", mods = "Alt|Shift", action = "ToggleViMode" },
+  { key = "Return", mods = "Shift", chars = "\u001b\r" },
 ]
 
 [scrolling]
@@ -97,5 +98,3 @@ y = 0
 [window.position]
 x = 0
 y = 0
-
-[terminal]
