@@ -103,19 +103,20 @@ local mod = {
 
 		local lsps = {
 			-- Typescript/Javascript
-			ts_ls = utilities.merge_tables({
-				cmd = {
-					-- os.getenv("HOME") .. "/.local/bin/typescript-language-server-bun",
-					vim.fn.stdpath("config") .. "/lang-servers/typescript-language-server-bun",
-					"--stdio",
-				},
-			}, defaultProps),
+			ts_ls = defaultProps,
+			--      utilities.merge_tables({
+			-- 	cmd = {
+			-- 		-- os.getenv("HOME") .. "/.local/bin/typescript-language-server-bun",
+			-- 		vim.fn.stdpath("config") .. "/lang-servers/typescript-language-server-bun",
+			-- 		"--stdio",
+			-- 	},
+			-- }, defaultProps),
 
 			-- SQL
 			sqlls = defaultProps,
 
-			-- Proto
-			protols = defaultProps,
+			-- Proto (disabled - not installed)
+			-- protols = defaultProps,
 
 			-- Dart
 			dartls = defaultProps,
@@ -214,7 +215,7 @@ local mod = {
 								wrapper = {
 									checksums = {
 										{
-											sha256 = "e68185c8c0f67873dcd98916621870266a71584dfb0a2861d87d7077ebc39837",
+											sha256 = "423cb469ccc0ecc31f0e4e1c309976198ccb734cdcbb7029d4bda0f18f57e8d9",
 											allowed = true,
 										},
 									},
@@ -333,8 +334,8 @@ local mod = {
 		}
 
 		for name, confs in pairs(lsps) do
-			vim.lsp.enable(name)
 			vim.lsp.config(name, confs)
+			vim.lsp.enable(name)
 		end
 	end,
 }

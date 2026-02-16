@@ -125,7 +125,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # --------------------------------------------------------------------
 # JAVA
 # --------------------------------------------------------------------
-export JAVA_HOME="$WORKSPACE_ENV/openjdk/openjdk-17.0.12+7-linux-x64"
+export JAVA_HOME="$WORKSPACE_ENV/openjdk/openjdk-21+35_linux-x64"
 append_path "$JAVA_HOME/bin" # Java bin
 append_path "$WORKSPACE_ENV/jdtls/latest/bin" # Java LSP
 
@@ -176,3 +176,6 @@ export OLLAMA_HOME="$SD_WORKSPACE_ENV/ollama"
 export OLLAMA_MODELS="/mnt/pnt_s1/env/ollama/models"
 append_path "$OLLAMA_HOME/bin"
 
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
+export PATH="$HOME/.local/bin:$PATH"
