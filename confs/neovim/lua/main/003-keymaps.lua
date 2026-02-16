@@ -139,6 +139,23 @@ local keymaps = {
 	{ mode = "n", shortcut = "<leader>gbr", fn = ":Telescope git_branches<CR>" },
 
 	----------------------------------------------------------------------------------------
+	-- diffview
+	{ mode = "n", shortcut = "<leader>gd", fn = ":DiffviewOpen<CR>" },
+	{ mode = "n", shortcut = "<leader>gq", fn = ":DiffviewClose<CR>" },
+	{ mode = "n", shortcut = "<leader>gh", fn = ":DiffviewFileHistory %<CR>" },
+	{ mode = "n", shortcut = "<leader>gH", fn = ":DiffviewFileHistory<CR>" },
+
+	----------------------------------------------------------------------------------------
+	-- gitsigns
+	{ mode = "n", shortcut = "]c", fn = ":Gitsigns next_hunk<CR>" },
+	{ mode = "n", shortcut = "[c", fn = ":Gitsigns prev_hunk<CR>" },
+	{ mode = "n", shortcut = "<leader>gp", fn = ":Gitsigns preview_hunk<CR>" },
+	{ mode = "n", shortcut = "<leader>gs", fn = ":Gitsigns stage_hunk<CR>" },
+	{ mode = "n", shortcut = "<leader>gu", fn = ":Gitsigns undo_stage_hunk<CR>" },
+	{ mode = "n", shortcut = "<leader>gr", fn = ":Gitsigns reset_hunk<CR>" },
+	{ mode = "n", shortcut = "<leader>gbl", fn = ":Gitsigns blame_line<CR>" },
+
+	----------------------------------------------------------------------------------------
 	{ mode = "n", shortcut = "<leader>nv", fn = ":NvimTreeToggle<CR>" },
 	{ mode = "n", shortcut = "<leader>nr", fn = ":NvimTreeRefresh<CR>" },
 	{ mode = "n", shortcut = "nf", fn = ":NvimTreeFocus<CR>" },
