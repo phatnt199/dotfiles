@@ -15,12 +15,17 @@ local mod = {
 			ignore_list = {},
 		},
 		renderer = {
+			highlight_git = "name",
 			icons = {
 				webdev_colors = true,
+				git_placement = "after",
+				show = {
+					git = false,
+				},
 			},
 		},
 		git = {
-			enable = false,
+			enable = true,
 			ignore = false,
 			timeout = 400,
 		},

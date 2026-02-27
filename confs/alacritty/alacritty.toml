@@ -1,100 +1,336 @@
-[colors.bright]
-black = "#636363"
-blue = "#7EAAC7"
-cyan = "#86D3CE"
-green = "#87AFAF"
-magenta = "#924653"
-red = "#AF5F5F"
-white = "#F7F7F7"
-yellow = "#EBC17A"
+# =============================================================================
+# Alacritty Configuration — Phat Nguyen
+# Docs: https://alacritty.org/config-alacritty.html
+# =============================================================================
 
-[colors.cursor]
-cursor = "#D9D9D9"
-text = "#2C2C2C"
+# -----------------------------------------------------------------------------
+# General
+# -----------------------------------------------------------------------------
 
-[colors.dim]
-black = "#232323"
-blue = "#556B79"
-cyan = "#5C8482"
-green = "#5E6547"
-magenta = "#6E4962"
-red = "#74423F"
-white = "#828282"
-yellow = "#8B7653"
+[general]
+# Reload config on save without restarting (default: true)
+live_config_reload = true
 
-[colors.normal]
-black = "#080808"
-blue = "#7EAAC7"
-cyan = "#86D3CE"
-green = "#87AFAF"
-magenta = "#924653"
-red = "#AF5F5F"
-white = "#EEEEEE"
-yellow = "#EBC17A"
+# Enable IPC socket for `alacritty msg` commands (default: true)
+ipc_socket = true
 
-[colors.primary]
-background = "#080808"
-foreground = "#EEE2DE"
+# Import additional config files (e.g., separate theme files)
+# import = ["~/.config/alacritty/themes/catppuccin.toml"]
 
-[colors.vi_mode_cursor]
-cursor = "CellForeground"
-text = "CellBackground"
+[env]
+# Ensure true color detection — "alacritty" if terminfo installed, else safe fallback
+TERM = "xterm-256color"
+
+# -----------------------------------------------------------------------------
+# Window
+# -----------------------------------------------------------------------------
+
+[window]
+# Window title shown in taskbar/titlebar
+title = "Phat Nguyen"
+
+# Allow running programs to change the window title (default: true)
+dynamic_title = true
+
+# Window border style: "Full" | "None" | "Transparent" | "Buttonless"
+decorations = "Full"
+
+# Force system theme for window decorations: "None" | "Dark" | "Light"
+decorations_theme_variant = "Dark"
+
+# Background opacity: 0.0 (transparent) to 1.0 (opaque)
+opacity = 1.0
+
+# Blur background when opacity < 1.0 (compositor must support)
+blur = false
+
+# Initial window state: "Windowed" | "Maximized" | "Fullscreen" | "SimpleFullscreen"
+startup_mode = "Windowed"
+
+# Distribute unused space evenly around the terminal grid
+dynamic_padding = false
+
+# Resize window in cell-size increments rather than pixel increments
+resize_increments = false
+
+# Window stacking: "Normal" | "AlwaysOnTop"
+# level = "Normal"
+
+[window.dimensions]
+# Starting size in columns x lines (0 = let WM decide)
+columns = 264
+lines = 64
+
+[window.position]
+# Starting position in pixels (remove to let WM decide)
+x = 0
+y = 0
+
+[window.padding]
+# Blank space (in pixels) between window edge and terminal grid
+x = 2
+y = 2
+
+# X11 window class
+[window.class]
+instance = "Alacritty"
+general = "Alacritty"
+
+# -----------------------------------------------------------------------------
+# Scrolling
+# -----------------------------------------------------------------------------
+
+[scrolling]
+# Max lines stored in scrollback buffer (0 to disable, max 100000)
+history = 10000
+
+# Lines scrolled per scroll input event (default: 3)
+multiplier = 4
+
+# -----------------------------------------------------------------------------
+# Font
+# -----------------------------------------------------------------------------
 
 [font]
+# Font size in points
 size = 9
 
-[font.bold]
-family = "UbuntuMono Nerd Font"
-style = "Bold"
-
-[font.bold_italic]
-family = "UbuntuMono Nerd Font"
-style = "Bold Italic"
-
-[font.italic]
-family = "UbuntuMono Nerd Font"
-style = "Italic"
+# Use built-in box/block drawing characters for perfect alignment
+builtin_box_drawing = true
 
 [font.normal]
 family = "UbuntuMono Nerd Font"
 style = "Regular"
 
+# Bold/italic/bold-italic inherit family from [font.normal] automatically.
+# Only specify these if you want a DIFFERENT family or style override.
+[font.bold]
+style = "Bold"
+
+[font.italic]
+style = "Italic"
+
+[font.bold_italic]
+style = "Bold Italic"
+
+# Extra spacing between characters (x) and lines (y) in pixels
 [font.offset]
 x = 0
 y = 0
 
-[keyboard]
-bindings = [
-  { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
-  { key = "V", mods = "Alt|Shift", action = "ToggleViMode" },
-  { key = "Return", mods = "Shift", chars = "\u001b\r" },
-]
+# Glyph position adjustment within cells (x = horizontal, y = vertical)
+# [font.glyph_offset]
+# x = 0
+# y = 0
 
-[scrolling]
-history = 10000
-multiplier = 4
+# -----------------------------------------------------------------------------
+# Colors — Custom dark theme
+# -----------------------------------------------------------------------------
+
+[colors.primary]
+background = "#080808"
+foreground = "#EEE2DE"
+# dim_foreground = "#828482"    # Color for dimmed text
+# bright_foreground = "None"   # Color for bold text (if draw_bold_text_with_bright_colors)
+
+[colors.cursor]
+cursor = "#D9D9D9"
+text = "#2C2C2C"
+
+[colors.vi_mode_cursor]
+cursor = "CellForeground"
+text = "CellBackground"
+
+[colors.selection]
+# Colors when text is selected (swap fg/bg for inverted look)
+text = "CellBackground"
+background = "CellForeground"
+
+[colors.search.matches]
+# All search matches highlighting
+foreground = "#181818"
+background = "#ac4242"
+
+[colors.search.focused_match]
+# The currently focused search match
+foreground = "#181818"
+background = "#f4bf75"
+
+[colors.normal]
+black = "#080808"
+red = "#AF5F5F"
+green = "#87AFAF"
+yellow = "#EBC17A"
+blue = "#7EAAC7"
+magenta = "#924653"
+cyan = "#86D3CE"
+white = "#EEEEEE"
+
+[colors.bright]
+black = "#636363"
+red = "#AF5F5F"
+green = "#87AFAF"
+yellow = "#EBC17A"
+blue = "#7EAAC7"
+magenta = "#924653"
+cyan = "#86D3CE"
+white = "#F7F7F7"
+
+[colors.dim]
+black = "#232323"
+red = "#74423F"
+green = "#5E6547"
+yellow = "#8B7653"
+blue = "#556B79"
+magenta = "#6E4962"
+cyan = "#5C8482"
+white = "#828282"
+
+# Use bright colors for bold text instead of just bold weight
+# draw_bold_text_with_bright_colors = false
+
+# Apply background opacity to ALL colored cells, not just default bg
+# transparent_background_colors = false
+
+# -----------------------------------------------------------------------------
+# Cursor
+# -----------------------------------------------------------------------------
+
+[cursor.style]
+# Shape: "Block" | "Underline" | "Beam"
+shape = "Block"
+
+# Blinking: "Never" | "Off" | "On" | "Always"
+# "Off" = respect terminal escape codes but start non-blinking
+blinking = "Off"
+
+[cursor]
+# Milliseconds between blink on/off
+# blink_interval = 750
+
+# Seconds until cursor stops blinking (0 = never stop)
+# blink_timeout = 5
+
+# Show hollow cursor when window is unfocused
+unfocused_hollow = true
+
+# Beam/underline thickness as fraction of cell width (0.0–1.0)
+# thickness = 0.15
+
+# Cursor style in vi mode (defaults to main cursor style if "None")
+# vi_mode_style = "None"
+
+# -----------------------------------------------------------------------------
+# Bell
+# -----------------------------------------------------------------------------
+
+[bell]
+# Visual bell flash animation: "Ease" | "EaseOut" | "EaseOutSine" |
+# "EaseOutQuad" | "EaseOutCubic" | "EaseOutQuart" | "EaseOutQuint" |
+# "EaseOutExpo" | "EaseOutCirc" | "Linear"
+animation = "Linear"
+
+# Flash duration in ms (0 = disabled)
+duration = 0
+
+# Flash color
+color = "#ffffff"
+
+# Run a command on bell (e.g., play a sound)
+# command = { program = "paplay", args = ["/usr/share/sounds/freedesktop/stereo/bell.oga"] }
+
+# -----------------------------------------------------------------------------
+# Selection
+# -----------------------------------------------------------------------------
+
+[selection]
+# Characters that define word boundaries for double-click selection
+semantic_escape_chars = ",│`|:\"' (){}<>\\t"
+
+# Automatically copy selected text to system clipboard
+save_to_clipboard = false
+
+# -----------------------------------------------------------------------------
+# Terminal
+# -----------------------------------------------------------------------------
+
+[terminal]
+# Clipboard access via OSC 52 escape sequence
+# "Disabled" | "OnlyCopy" | "OnlyPaste" | "CopyPaste"
+osc52 = "OnlyCopy"
 
 [terminal.shell]
+# Shell program (defaults to $SHELL or login shell from /etc/passwd)
 program = "/bin/zsh"
 args = ["-l"]
 
-[window]
-decorations = "full"
-decorations_theme_variant = "Dark"
-dynamic_padding = false
-dynamic_title = true
-opacity = 1.0
-startup_mode = "Windowed"
-title = "Phat Nguyen"
+# -----------------------------------------------------------------------------
+# Mouse
+# -----------------------------------------------------------------------------
 
-[window.dimensions]
-columns = 264
-lines = 64
+[mouse]
+# Hide mouse cursor while typing
+hide_when_typing = false
 
-[window.padding]
-x = 0
-y = 0
+# Mouse button bindings
+# bindings = [
+#   { mouse = "Right", mods = "Control", action = "Paste" },
+# ]
 
-[window.position]
-x = 0
-y = 0
+# -----------------------------------------------------------------------------
+# Hints — Regex-triggered clickable elements
+# -----------------------------------------------------------------------------
+
+[hints]
+# Characters used to label hints (first char = first label)
+alphabet = "jfkdls;ahgurieowpq"
+
+# URL hint: click URLs with a modifier key
+# [[hints.enabled]]
+# regex = "(mailto:|https:|http:|file:|git:|ssh:)[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\s{-}\\^⟨⟩`]+"
+# hyperlinks = true
+# action = "Open"
+# post_processing = true
+# persist = false
+# mouse.enabled = true
+# mouse.mods = "None"
+# binding = { key = "U", mods = "Control|Shift" }
+
+# -----------------------------------------------------------------------------
+# Keyboard Bindings
+# -----------------------------------------------------------------------------
+
+[keyboard]
+bindings = [
+  # Open a new Alacritty window
+  { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
+
+  # Toggle vi mode for keyboard-driven navigation
+  { key = "V", mods = "Alt|Shift", action = "ToggleViMode" },
+
+  # Shift+Enter sends ESC + CR (useful for some TUI apps)
+  { key = "Return", mods = "Shift", chars = "\u001b\r" },
+
+  # Uncomment to add more bindings:
+  # { key = "F", mods = "Control|Shift", action = "SearchForward" },
+  # { key = "B", mods = "Control|Shift", action = "SearchBackward" },
+  # { key = "C", mods = "Control|Shift", action = "Copy" },
+  # { key = "V", mods = "Control|Shift", action = "Paste" },
+  # { key = "Key0", mods = "Control", action = "ResetFontSize" },
+  # { key = "Plus", mods = "Control", action = "IncreaseFontSize" },
+  # { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
+  # { key = "L", mods = "Control", action = "ClearLogNotice" },
+]
+
+# -----------------------------------------------------------------------------
+# Debug (normally leave these alone)
+# -----------------------------------------------------------------------------
+
+# [debug]
+# render_timer = false        # Show frame render time overlay
+# persistent_logging = false  # Keep log file after exit
+# log_level = "Warn"          # "Off" | "Error" | "Warn" | "Info" | "Debug" | "Trace"
+# print_events = false        # Log all window events
+# highlight_damage = false    # Highlight damage regions
+# prefer_egl = false          # Prefer EGL over GLX
+# renderer = "None"           # Force renderer: "None" | "Glx" | "Egl" | "Wgl"

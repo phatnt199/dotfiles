@@ -102,6 +102,11 @@ append_path () {
 append_path "$HOME/.local/bin"
 
 # --------------------------------------------------------------------
+# RUST
+# --------------------------------------------------------------------
+. "$HOME/.cargo/env"
+
+# --------------------------------------------------------------------
 # NVM
 # --------------------------------------------------------------------
 export NVM_DIR="$HOME/.nvm"
@@ -175,7 +180,3 @@ append_path "$WORKSPACE_ENV/pgFormatter"
 export OLLAMA_HOME="$SD_WORKSPACE_ENV/ollama"
 export OLLAMA_MODELS="/mnt/pnt_s1/env/ollama/models"
 append_path "$OLLAMA_HOME/bin"
-
-export DOTNET_ROOT=$HOME/.dotnet
-export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
-export PATH="$HOME/.local/bin:$PATH"
