@@ -1,6 +1,6 @@
 local mod = {
-	"lilydjwg/colorizer",
-	config = function() end,
+  "lilydjwg/colorizer",
+  config = function() end,
 }
 
 return mod
