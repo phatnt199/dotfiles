@@ -130,31 +130,35 @@ y = 0
 [colors.primary]
 background = "#080808"
 foreground = "#EEE2DE"
-# dim_foreground = "#828482"    # Color for dimmed text
-# bright_foreground = "None"   # Color for bold text (if draw_bold_text_with_bright_colors)
+dim_foreground = "#797979"
 
 [colors.cursor]
-cursor = "#D9D9D9"
-text = "#2C2C2C"
+cursor = "#AF5F5F"
+text = "#080808"
 
 [colors.vi_mode_cursor]
-cursor = "CellForeground"
-text = "CellBackground"
+cursor = "#7DB9B6"
+text = "#080808"
 
 [colors.selection]
-# Colors when text is selected (swap fg/bg for inverted look)
-text = "CellBackground"
-background = "CellForeground"
+text = "#EEE2DE"
+background = "#383838"
 
 [colors.search.matches]
-# All search matches highlighting
-foreground = "#181818"
-background = "#ac4242"
+foreground = "#080808"
+background = "#D59572"
 
 [colors.search.focused_match]
-# The currently focused search match
-foreground = "#181818"
-background = "#f4bf75"
+foreground = "#080808"
+background = "#EBC17A"
+
+[colors.hints.start]
+foreground = "#080808"
+background = "#EBC17A"
+
+[colors.hints.end]
+foreground = "#080808"
+background = "#7DB9B6"
 
 [colors.normal]
 black = "#080808"
@@ -163,28 +167,28 @@ green = "#87AFAF"
 yellow = "#EBC17A"
 blue = "#7EAAC7"
 magenta = "#924653"
-cyan = "#86D3CE"
-white = "#EEEEEE"
+cyan = "#7DB9B6"
+white = "#EEE2DE"
 
 [colors.bright]
-black = "#636363"
-red = "#AF5F5F"
-green = "#87AFAF"
-yellow = "#EBC17A"
+black = "#797979"
+red = "#D68C8C"
+green = "#86D3CE"
+yellow = "#E5B567"
 blue = "#7EAAC7"
-magenta = "#924653"
+magenta = "#D68C8C"
 cyan = "#86D3CE"
 white = "#F7F7F7"
 
 [colors.dim]
-black = "#232323"
+black = "#181818"
 red = "#74423F"
-green = "#5E6547"
+green = "#5C8482"
 yellow = "#8B7653"
 blue = "#556B79"
 magenta = "#6E4962"
 cyan = "#5C8482"
-white = "#828282"
+white = "#636363"
 
 # Use bright colors for bold text instead of just bold weight
 # draw_bold_text_with_bright_colors = false
