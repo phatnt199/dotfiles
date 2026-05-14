@@ -88,6 +88,9 @@ alias nv="nvim ."
 alias sa="sudo apt"
 alias ws="cd $WORKSPACE"
 alias "\e"="spf"
+alias tanphat199-claude="CLAUDE_CONFIG_DIR=$WORKSPACE_ENV/claude-code/tanphat199 claude"
+alias toantraz-claude="CLAUDE_CONFIG_DIR=$WORKSPACE_ENV/claude-code/toantraz claude"
+alias claude="CLAUDE_CONFIG_DIR=~/.claude claude"
 
 # --------------------------------------------------------------------
 append_path () {

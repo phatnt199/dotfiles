@@ -68,16 +68,12 @@ local mod = {
     local defaultProps = {
       capabilities = cmpLsp.default_capabilities(vim.lsp.protocol.make_client_capabilities()),
       flags = { debounce_text_changes = 250 },
-      handlers = {
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-          virtual_text = false,
-          underline = true,
-          update_in_insert = false,
-        }),
-      },
     }
 
     vim.diagnostic.config({
+      virtual_text = false,
+      underline = true,
+      update_in_insert = false,
       float = { focusable = false },
       signs = {
         text = {

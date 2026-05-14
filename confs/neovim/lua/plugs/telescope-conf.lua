@@ -1,6 +1,6 @@
 local mod = {
   "nvim-telescope/telescope.nvim",
-  branch = "0.1.x",
+  branch = "master",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-media-files.nvim",
@@ -10,6 +10,11 @@ local mod = {
 
     ts.load_extension("media_files")
     ts.setup({
+      defaults = {
+        preview = {
+          treesitter = { enable = false },
+        },
+      },
       extensions = {
         media_files = {
           file_types = { "png", "jpg", "jpeg", "webp", "pdf" },
