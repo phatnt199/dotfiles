@@ -176,10 +176,3 @@ append_path "$WORKSPACE_ENV/protoc/linux/bin"
 # PG_FORMAT
 # --------------------------------------------------------------------
 append_path "$WORKSPACE_ENV/pgFormatter"
-
-# --------------------------------------------------------------------
-# OLLAMA
-# --------------------------------------------------------------------
-export OLLAMA_HOME="$SD_WORKSPACE_ENV/ollama"
-export OLLAMA_MODELS="/mnt/pnt_s1/env/ollama/models"
-append_path "$OLLAMA_HOME/bin"

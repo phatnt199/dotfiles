@@ -1,0 +1,73 @@
+# =============================================================================
+# devglow — sage (default)
+# Muted, grey-tinted, calm. A dark room with just enough candlelight to read by.
+#
+# Theme by: Phat Nguyen (tanphat199@gmail.com) — https://github.com/phatnt199
+# Source palette: devglow/lua/devglow/palettes/sage.lua
+# Mapped to match the devglow Neovim, zsh, and superfile themes.
+# =============================================================================
+
+[colors.primary]
+background     = "#080808"  # BACKGROUND
+foreground     = "#E6E6E6"  # FOREGROUND
+dim_foreground = "#797979"  # DARK_04
+
+[colors.cursor]
+# GOLD — matches the superfile devglow cursor for cross-app consistency
+cursor = "#EBC17A"
+text   = "#080808"
+
+[colors.vi_mode_cursor]
+cursor = "#7DB9B6"  # TEAL
+text   = "#080808"
+
+[colors.selection]
+text       = "#E6E6E6"  # FOREGROUND
+background = "#383838"  # DARK_03
+
+[colors.search.matches]
+foreground = "#080808"
+background = "#D59572"  # ORANGE
+
+[colors.search.focused_match]
+foreground = "#080808"
+background = "#EBC17A"  # GOLD
+
+[colors.hints.start]
+foreground = "#080808"
+background = "#EBC17A"  # GOLD
+
+[colors.hints.end]
+foreground = "#080808"
+background = "#7DB9B6"  # TEAL
+
+# ANSI 16 — derived from the sage palette accents
+[colors.normal]
+black   = "#181818"  # DARK_01  (slightly raised so color0 stays visible)
+red     = "#AF5F5F"  # RED
+green   = "#87AFAF"  # GREEN
+yellow  = "#E5B567"  # YELLOW
+blue    = "#7590AF"  # BLUE
+magenta = "#924653"  # WINE
+cyan    = "#7DB9B6"  # TEAL
+white   = "#E6E6E6"  # FOREGROUND
+
+[colors.bright]
+black   = "#797979"  # DARK_04
+red     = "#D68C8C"  # PINK
+green   = "#7DB9B6"  # TEAL
+yellow  = "#EBC17A"  # GOLD
+blue    = "#7EAAC7"  # SKY
+magenta = "#D68C8C"  # PINK
+cyan    = "#86D3CE"  # TEAL (brightened)
+white   = "#FFFFFF"
+
+[colors.dim]
+black   = "#111111"  # DARK_00
+red     = "#74423F"
+green   = "#5C8482"
+yellow  = "#8B7653"
+blue    = "#556B79"
+magenta = "#6E4962"
+cyan    = "#5C8482"
+white   = "#636363"

@@ -1,10 +1,5 @@
-# =============================================================================
-# Alacritty Configuration — Phat Nguyen
-# Docs: https://alacritty.org/config-alacritty.html
-# =============================================================================
-
 # -----------------------------------------------------------------------------
-# General
+# Alacritty Configuration — Phat Nguyen
 # -----------------------------------------------------------------------------
 
 [general]
@@ -14,12 +9,16 @@ live_config_reload = true
 # Enable IPC socket for `alacritty msg` commands (default: true)
 ipc_socket = true
 
-# Import additional config files (e.g., separate theme files)
-# import = ["~/.config/alacritty/themes/catppuccin.toml"]
+# Import additional config files. Theme lives in a separate file so variants
+# can be swapped by changing this single line (e.g. devglow-vesper.toml).
+# NOTE: requires `~/.config/alacritty/themes` -> dotfiles themes dir symlink.
+import = ["~/.config/alacritty/themes/devglow-sage.toml"]
 
 [env]
-# Ensure true color detection — "alacritty" if terminfo installed, else safe fallback
-TERM = "xterm-256color"
+# "alacritty" terminfo is installed on this machine, so advertise it. This is
+# what makes tmux's `terminal-features ",alacritty:RGB:clipboard:..."` match,
+# enabling true color, OSC52 clipboard, cursor style/color, focus & title.
+TERM = "alacritty"
 
 # -----------------------------------------------------------------------------
 # Window
@@ -124,75 +123,16 @@ y = 0
 # y = 0
 
 # -----------------------------------------------------------------------------
-# Colors — Custom dark theme
+# Colors
 # -----------------------------------------------------------------------------
-
-[colors.primary]
-background = "#080808"
-foreground = "#EEE2DE"
-dim_foreground = "#797979"
-
-[colors.cursor]
-cursor = "#AF5F5F"
-text = "#080808"
-
-[colors.vi_mode_cursor]
-cursor = "#7DB9B6"
-text = "#080808"
-
-[colors.selection]
-text = "#EEE2DE"
-background = "#383838"
-
-[colors.search.matches]
-foreground = "#080808"
-background = "#D59572"
-
-[colors.search.focused_match]
-foreground = "#080808"
-background = "#EBC17A"
-
-[colors.hints.start]
-foreground = "#080808"
-background = "#EBC17A"
-
-[colors.hints.end]
-foreground = "#080808"
-background = "#7DB9B6"
-
-[colors.normal]
-black = "#080808"
-red = "#AF5F5F"
-green = "#87AFAF"
-yellow = "#EBC17A"
-blue = "#7EAAC7"
-magenta = "#924653"
-cyan = "#7DB9B6"
-white = "#EEE2DE"
-
-[colors.bright]
-black = "#797979"
-red = "#D68C8C"
-green = "#86D3CE"
-yellow = "#E5B567"
-blue = "#7EAAC7"
-magenta = "#D68C8C"
-cyan = "#86D3CE"
-white = "#F7F7F7"
-
-[colors.dim]
-black = "#181818"
-red = "#74423F"
-green = "#5C8482"
-yellow = "#8B7653"
-blue = "#556B79"
-magenta = "#6E4962"
-cyan = "#5C8482"
-white = "#636363"
-
+# The full palette lives in the imported theme file (see [general] import).
+# Active theme: devglow-sage. Swap variants by editing the import line above.
+#
+# These two toggles are theme-independent, so they stay here:
+#
 # Use bright colors for bold text instead of just bold weight
 # draw_bold_text_with_bright_colors = false
-
+#
 # Apply background opacity to ALL colored cells, not just default bg
 # transparent_background_colors = false
 
@@ -289,16 +229,16 @@ hide_when_typing = false
 # Characters used to label hints (first char = first label)
 alphabet = "jfkdls;ahgurieowpq"
 
-# URL hint: click URLs with a modifier key
-# [[hints.enabled]]
-# regex = "(mailto:|https:|http:|file:|git:|ssh:)[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\s{-}\\^⟨⟩`]+"
-# hyperlinks = true
-# action = "Open"
-# post_processing = true
-# persist = false
-# mouse.enabled = true
-# mouse.mods = "None"
-# binding = { key = "U", mods = "Control|Shift" }
+# URL hint: Ctrl+Shift+U to label links, or Ctrl+click to open directly.
+[[hints.enabled]]
+regex = "(mailto:|https:|http:|file:|git:|ssh:)[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\s{-}\\^⟨⟩`]+"
+hyperlinks = true
+command = "xdg-open"   # Linux opener (use "open" on macOS)
+post_processing = true
+persist = false
+mouse.enabled = true
+mouse.mods = "Control"
+binding = { key = "U", mods = "Control|Shift" }
 
 # -----------------------------------------------------------------------------
 # Keyboard Bindings
@@ -315,15 +255,25 @@ bindings = [
   # Shift+Enter sends ESC + CR (useful for some TUI apps)
   { key = "Return", mods = "Shift", chars = "\u001b\r" },
 
-  # Uncomment to add more bindings:
-  # { key = "F", mods = "Control|Shift", action = "SearchForward" },
-  # { key = "B", mods = "Control|Shift", action = "SearchBackward" },
-  # { key = "C", mods = "Control|Shift", action = "Copy" },
-  # { key = "V", mods = "Control|Shift", action = "Paste" },
-  # { key = "Key0", mods = "Control", action = "ResetFontSize" },
-  # { key = "Plus", mods = "Control", action = "IncreaseFontSize" },
-  # { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
-  # { key = "L", mods = "Control", action = "ClearLogNotice" },
+  # Clipboard (Ctrl+Shift so plain Ctrl-C / Ctrl-V still reach the shell & tmux)
+  { key = "C", mods = "Control|Shift", action = "Copy" },
+  { key = "V", mods = "Control|Shift", action = "Paste" },
+
+  # Search the scrollback buffer
+  { key = "F", mods = "Control|Shift", action = "SearchForward" },
+  { key = "B", mods = "Control|Shift", action = "SearchBackward" },
+
+  # Font size: grow / shrink / reset
+  { key = "Plus",   mods = "Control", action = "IncreaseFontSize" },
+  { key = "Equals", mods = "Control", action = "IncreaseFontSize" },  # Ctrl+= (no Shift needed)
+  { key = "Minus",  mods = "Control", action = "DecreaseFontSize" },
+  { key = "Key0",   mods = "Control", action = "ResetFontSize" },
+
+  # Scrollback paging (handy outside tmux's own copy-mode)
+  { key = "PageUp",   mods = "Shift", action = "ScrollPageUp" },
+  { key = "PageDown", mods = "Shift", action = "ScrollPageDown" },
+  { key = "Home",     mods = "Shift", action = "ScrollToTop" },
+  { key = "End",      mods = "Shift", action = "ScrollToBottom" },
 ]
 
 # -----------------------------------------------------------------------------
