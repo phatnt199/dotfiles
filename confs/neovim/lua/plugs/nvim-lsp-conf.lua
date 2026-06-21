@@ -20,8 +20,7 @@ local mod = {
       flags = { debounce_text_changes = 250 },
     }
 
-    local servers = pairs(require("plugs.lsp.servers"))
-    for name, conf in servers do
+    for name, conf in pairs(require("plugs.lsp.servers")) do
       vim.lsp.config(name, vim.tbl_deep_extend("force", defaults, conf))
       vim.lsp.enable(name)
     end
