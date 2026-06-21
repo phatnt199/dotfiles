@@ -8,10 +8,6 @@ export WORKSPACE="$HOME/Workspace"
 export WORKSPACE_ENV="$WORKSPACE/env"
 export WORKSPACE_SAVE="$WORKSPACE/save"
 
-export SD_PATH="/media/tanphat199/PNT_S1"
-export SD_WORKSPACE_ENV="$SD_PATH/env"
-export SD_WORKSPACE_SAVE="$SD_PATH/save"
-
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
@@ -83,14 +79,15 @@ else
 fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
+
 alias nv="nvim ."
 alias sa="sudo apt"
-alias ws="cd $WORKSPACE"
 alias "\e"="spf"
-alias tanphat199-claude="CLAUDE_CONFIG_DIR=$WORKSPACE_ENV/claude-code/tanphat199 claude"
-alias toantraz-claude="CLAUDE_CONFIG_DIR=$WORKSPACE_ENV/claude-code/toantraz claude"
+
 alias claude="CLAUDE_CONFIG_DIR=~/.claude claude"
+
+alias ws="cd $WORKSPACE"
 
 # --------------------------------------------------------------------
 append_path () {

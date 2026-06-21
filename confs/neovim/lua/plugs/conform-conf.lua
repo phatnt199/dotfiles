@@ -1,5 +1,6 @@
 local mod = {
   "stevearc/conform.nvim",
+  cmd = "ConformFormat",
   config = function()
     local mod = require("conform")
 

@@ -43,6 +43,9 @@ local mod = {
     vim.api.nvim_create_autocmd("FileType", {
       callback = function(args)
         local buf = args.buf
+        if vim.b[buf].big_file then
+          return
+        end
         local lang = vim.treesitter.language.get_lang(vim.bo[buf].filetype)
         if not lang then
           return

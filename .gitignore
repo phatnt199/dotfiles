@@ -7,3 +7,5 @@ backup/**/*/plugged
 backup/**/*/plugged/*
 ./backup/**/*/plugged
 ./backup/**/*/plugged/*
+
+.claude

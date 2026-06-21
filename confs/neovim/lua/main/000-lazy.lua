@@ -1,3 +1,6 @@
+vim.g.mapleader = "\\"
+vim.g.maplocalleader = "\\"
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -23,4 +26,6 @@ require("lazy").setup({
   spec = { { import = "plugs" } },
   install = { colorscheme = { "devglow" } },
   checker = { enabled = false },
+  -- No plugins require luarocks; disable hererocks to silence health warnings.
+  rocks = { enabled = false },
 })
