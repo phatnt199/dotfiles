@@ -45,13 +45,20 @@ autocmd("BufReadPre", {
   end,
 })
 
+-- Remove Neovim 0.11+ default global `gr*` mappings (`grn`, `gra`, `grr`, `gri`, `grt`, `grx`)
+-- so buffer-local `gr` (goto references) fires immediately with zero `timeoutlen` delay.
+for _, lhs in ipairs({ "grn", "gra", "grr", "gri", "grt", "grx" }) do
+  pcall(vim.keymap.del, { "n", "x" }, lhs)
+  pcall(vim.keymap.del, "n", lhs)
+end
+
 -- Buffer-local LSP keymaps, attached only when a server is active on the buffer.
 autocmd("LspAttach", {
   group = augroup("lsp_attach_keymaps", { clear = true }),
   callback = function(event)
     local buf = event.buf
-    local function map(lhs, fn, desc)
-      vim.keymap.set("n", lhs, fn, { buffer = buf, silent = true, desc = "LSP: " .. desc })
+    local function map(lhs, fn, desc, mode)
+      vim.keymap.set(mode or "n", lhs, fn, { buffer = buf, silent = true, desc = "LSP: " .. desc })
     end
 
     map("gD", vim.lsp.buf.declaration, "Goto declaration")
@@ -62,9 +69,10 @@ autocmd("LspAttach", {
     map("<C-k>", vim.lsp.buf.signature_help, "Signature help")
     map("<leader>D", vim.lsp.buf.type_definition, "Type definition")
     map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
-    map("<leader>ac", vim.lsp.buf.code_action, "Code action")
+    map("<leader>ac", vim.lsp.buf.code_action, "Code action", { "n", "x" })
+    map("<leader>cl", vim.lsp.codelens.run, "Run CodeLens")
     map("<leader>oi", function()
-      vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
+      vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" }, diagnostics = {} }, apply = true })
     end, "Organize imports")
   end,
 })

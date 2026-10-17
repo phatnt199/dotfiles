@@ -1,6 +1,5 @@
 local mod = {
   "nvim-tree/nvim-tree.lua",
-  version = "*",
   lazy = false,
   dependencies = {
     "nvim-tree/nvim-web-devicons",
@@ -8,25 +7,39 @@ local mod = {
   opts = {
     disable_netrw = true,
     hijack_netrw = true,
-    open_on_tab = false,
+    tab = {
+      sync = {
+        open = false,
+        close = false,
+      },
+    },
     update_focused_file = {
       enable = true,
-      update_cwd = false,
-      ignore_list = {},
+      update_root = {
+        enable = false,
+        ignore_list = {},
+      },
     },
     renderer = {
       highlight_git = "name",
       icons = {
-        webdev_colors = true,
+        web_devicons = {
+          file = {
+            enable = true,
+            color = true,
+          },
+        },
         git_placement = "after",
         show = {
           git = false,
         },
       },
     },
+    filters = {
+      git_ignored = false,
+    },
     git = {
       enable = true,
-      ignore = false,
       timeout = 400,
     },
     view = {

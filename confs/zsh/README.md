@@ -42,20 +42,19 @@ self-contained.
 
 ## Language toolchains wired in `PATH`
 
-Rust (`cargo`), Node via **nvm**, **Bun** (via `bum` version manager), **Java**
-(OpenJDK 21 + `jdtls` language server), **Android** SDK (emulator, platform-tools,
-cmdline-tools), **Go**, **Flutter**, **Lua** (+ lua-language-server), **protoc**,
-and **pg_format**.
+Rust (`cargo`), Node via **nvm** (fast `PATH` resolution + lazy-loaded CLI),
+**Bun** (`~/.bun`), **Java** (auto-detected OpenJDK + `jdtls` language server),
+**Android** SDK (emulator, platform-tools, cmdline-tools), **Go**, **Flutter**,
+**Lua** (+ lua-language-server), **protoc**, **pg_format**, **kubectl**, and
+**git-delta**.
 
 Most are rooted at `$WORKSPACE_ENV/<tool>`, so reproducing the environment means
-placing the corresponding runtime there. `JAVA_HOME` points at a specific
-OpenJDK build that the Neovim Java setup also relies on
-(see `../neovim/JAVA_SETUP.md`).
+placing the corresponding runtime there. `JAVA_HOME` automatically resolves to
+the newest OpenJDK build under `$WORKSPACE_ENV/openjdk/`.
 
-> **Note:** the custom `append_path` helper skips appending when inside tmux
-> (tmux already inherits the parent shell's `PATH`), avoiding duplicate entries
-> in nested shells.
-
+> **Note:** `typeset -U path PATH` keeps `PATH` entries automatically
+> deduplicated across nested shells, tmux panes, and `source ~/.zshrc` reloads,
+> and `append_path`/`prepend_path` only add directories that exist on disk.
 ## Installation
 
 Handled by the repo's `configure.sh`, which links `.zshrc` to `~/.zshrc`.

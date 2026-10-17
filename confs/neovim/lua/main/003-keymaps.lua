@@ -28,6 +28,10 @@ local keymaps = {
   { mode = "n", shortcut = "]q",          fn = ":cnext<CR>",                              desc = "Next quickfix item" },
   { mode = "n", shortcut = "[q",          fn = ":cprevious<CR>",                          desc = "Previous quickfix item" },
 
+  { mode = "n", shortcut = "]f",          fn = function() require("utilities.index").nav_tree_file(1) end,  desc = "Next file in tree" },
+  { mode = "n", shortcut = "[f",          fn = function() require("utilities.index").nav_tree_file(-1) end, desc = "Previous file in tree" },
+  { mode = "n", shortcut = "]g",          fn = function() require("utilities.index").nav_git_file(1) end,   desc = "Next git changed file" },
+  { mode = "n", shortcut = "[g",          fn = function() require("utilities.index").nav_git_file(-1) end,  desc = "Previous git changed file" },
   -- Diagnostics (work without an attached LSP, so kept global).
   { mode = "n", shortcut = "<space>e",    fn = function() vim.diagnostic.open_float() end,                desc = "Show diagnostic float" },
   { mode = "n", shortcut = "]d",          fn = function() vim.diagnostic.jump({ count = 1, float = true }) end,   desc = "Next diagnostic" },
@@ -87,7 +91,6 @@ local keymaps = {
   { mode = "n", shortcut = "<leader>msp", fn = ":Markview splitToggle<CR>",               desc = "Markview split toggle" },
 }
 
-for index in ipairs(keymaps) do
-  local keymap = keymaps[index]
+for _, keymap in ipairs(keymaps) do
   vim.keymap.set(keymap.mode, keymap.shortcut, keymap.fn, { silent = true, desc = keymap.desc })
 end

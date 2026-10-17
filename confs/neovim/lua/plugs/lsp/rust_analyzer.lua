@@ -1,16 +1,23 @@
 -- Rust (rust-analyzer)
 return {
   settings = {
-    ["rust_analyzer"] = {
-      checkOnSave = {
-        overrideCommand = {
-          "cargo",
-          "clippy",
-          "--workspace",
-          "--message-format=json",
-          "--all-targets",
-          "--all-features",
+    ["rust-analyzer"] = {
+      cargo = {
+        allFeatures = true,
+        loadOutDirsFromCheck = true,
+        buildScripts = {
+          enable = true,
         },
+      },
+      checkOnSave = true,
+      check = {
+        command = "clippy",
+        extraArgs = {
+          "--all-targets",
+        },
+      },
+      procMacro = {
+        enable = true,
       },
     },
   },

@@ -64,9 +64,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# eval "$(starship init zsh)"
-eval "$(fzf --zsh)"
-
+# Note: `fzf` keybindings and completions are already loaded by the oh-my-zsh `fzf` plugin above.
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
@@ -85,18 +83,25 @@ alias nv="nvim ."
 alias sa="sudo apt"
 alias "\e"="spf"
 
-alias claude="CLAUDE_CONFIG_DIR=~/.claude claude"
+export CLAUDE_BIN="$HOME/.local/bin/claude"
+
+# alias claude="CLAUDE_CONFIG_DIR=~/.claude claude"
+
+alias claude-toantraz='CLAUDE_CONFIG_DIR=~/Workspace/save/tanphat199/agent-contracts/.claude-toantraz $CLAUDE_BIN'
+alias claude-tanphat199='CLAUDE_CONFIG_DIR=~/Workspace/save/tanphat199/agent-contracts/.claude-tanphat199 $CLAUDE_BIN'
 
 alias ws="cd $WORKSPACE"
 
 # --------------------------------------------------------------------
-append_path () {
-  if [ ! -z $TMUX ]; then
-    return
-  fi
+# Keep PATH entries unique automatically across nested shells, tmux panes, and reloads.
+typeset -U path PATH
 
-  # echo "Append: $1"
-  export PATH="$PATH:$1"
+append_path () {
+  [ -d "$1" ] && export PATH="$PATH:$1"
+}
+
+prepend_path () {
+  [ -d "$1" ] && export PATH="$1:$PATH"
 }
 
 append_path "$HOME/.local/bin"
@@ -104,33 +109,38 @@ append_path "$HOME/.local/bin"
 # --------------------------------------------------------------------
 # RUST
 # --------------------------------------------------------------------
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 # --------------------------------------------------------------------
-# NVM
+# NVM (fast PATH wire-up + on-demand lazy load for `nvm` CLI)
 # --------------------------------------------------------------------
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+for _node_dir in "$NVM_DIR"/versions/node/v*; do
+  [ -d "$_node_dir/bin" ] && _latest_node="$_node_dir/bin"
+done
+[ -n "$_latest_node" ] && prepend_path "$_latest_node"
+unset _node_dir _latest_node
+
+nvm () {
+  unfunction nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+  nvm "$@"
+}
 
 # --------------------------------------------------------------------
-# BUM
+# BUN
 # --------------------------------------------------------------------
-export BUM_HOME="$HOME/.bum"
-append_path "$BUM_HOME/bin"
-append_path "$BUM_HOME/bun-versions/1.2.23"
-
-# bun completions
-[ -s "/home/tanphat199/.bun/_bun" ] && source "/home/tanphat199/.bun/_bun"
-
-# bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
+prepend_path "$BUN_INSTALL/bin"
+[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
 # --------------------------------------------------------------------
 # JAVA
 # --------------------------------------------------------------------
-export JAVA_HOME="$WORKSPACE_ENV/openjdk/openjdk-21+35_linux-x64"
+for _jdk_dir in "$WORKSPACE_ENV"/openjdk/openjdk-*; do
+  [ -d "$_jdk_dir" ] && export JAVA_HOME="$_jdk_dir"
+done
+unset _jdk_dir
 append_path "$JAVA_HOME/bin" # Java bin
 append_path "$WORKSPACE_ENV/jdtls/latest/bin" # Java LSP
 
@@ -173,3 +183,9 @@ append_path "$WORKSPACE_ENV/protoc/linux/bin"
 # PG_FORMAT
 # --------------------------------------------------------------------
 append_path "$WORKSPACE_ENV/pgFormatter"
+
+# --------------------------------------------------------------------
+# KUBECTL & GIT-DELTA
+# --------------------------------------------------------------------
+append_path "$WORKSPACE_ENV/kubectl"
+append_path "$WORKSPACE_ENV/git-delta"

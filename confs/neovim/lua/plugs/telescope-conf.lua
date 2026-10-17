@@ -18,7 +18,7 @@ local mod = {
     ts.setup({
       defaults = {
         preview = {
-          treesitter = { enable = false },
+          treesitter = false,
         },
       },
       extensions = {

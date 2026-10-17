@@ -12,18 +12,21 @@ local mod = {
 
     require("plugs.lsp.diagnostics").setup()
 
-    -- Per-language configs live in plugs/lsp/*.lua, aggregated by servers.lua.
-    -- capabilities + flags are applied uniformly here so each language module
-    -- only needs to declare its own settings.
-    local defaults = {
+    -- Apply shared capabilities to all servers via Neovim 0.11+ wildcard config.
+    -- Note: legacy `flags.debounce_text_changes` is intentionally omitted so incremental
+    -- sync reaches servers immediately without a 250ms artificial client-side delay.
+    vim.lsp.config("*", {
       capabilities = capabilities,
-      flags = { debounce_text_changes = 250 },
-    }
+    })
 
+    local enabled = {}
     for name, conf in pairs(require("plugs.lsp.servers")) do
-      vim.lsp.config(name, vim.tbl_deep_extend("force", defaults, conf))
-      vim.lsp.enable(name)
+      if next(conf) ~= nil then
+        vim.lsp.config(name, conf)
+      end
+      table.insert(enabled, name)
     end
+    vim.lsp.enable(enabled)
   end,
 }
 

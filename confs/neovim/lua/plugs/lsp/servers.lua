@@ -1,5 +1,6 @@
 return {
   ts_ls = require("plugs.lsp.ts_ls"),
+  oxlint = require("plugs.lsp.oxlint"),
   sqlls = require("plugs.lsp.sqlls"),
   dartls = require("plugs.lsp.dartls"),
   bashls = require("plugs.lsp.bashls"),

@@ -1,2 +1,4 @@
 -- SQL (sql-language-server)
-return {}
+return {
+  root_markers = { ".sqllsrc.json", ".git" },
+}

@@ -1,4 +1,5 @@
 local ensure_installed = {
+  "bash",
   "c",
   "cpp",
   "css",
@@ -11,12 +12,15 @@ local ensure_installed = {
   "javascript",
   "json",
   "json5",
+  "latex",
   "lua",
   "markdown",
   "markdown_inline",
+  "python",
   "rust",
   "tsx",
   "typescript",
+  "typst",
   "vim",
   "vimdoc",
   "yaml",
@@ -33,12 +37,18 @@ local ensure_installed = {
 local mod = {
   "nvim-treesitter/nvim-treesitter",
   branch = "main",
-  dependencies = { "OXY2DEV/markview.nvim" },
   lazy = false,
   build = ":TSUpdate",
   config = function()
-    require("nvim-treesitter").install(ensure_installed)
-
+    local missing = {}
+    for _, lang in ipairs(ensure_installed) do
+      if #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".so", false) == 0 then
+        table.insert(missing, lang)
+      end
+    end
+    if #missing > 0 then
+      require("nvim-treesitter").install(missing)
+    end
     -- main branch does not enable highlighting itself; start it per buffer
     vim.api.nvim_create_autocmd("FileType", {
       callback = function(args)

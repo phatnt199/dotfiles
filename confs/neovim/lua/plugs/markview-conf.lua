@@ -1,7 +1,7 @@
 local mod = {
   "OXY2DEV/markview.nvim",
-  lazy = true,
-  priority = 49,
+  ft = { "markdown", "quarto", "rmd", "typst" },
+  cmd = "Markview",
   dependencies = {
     "saghen/blink.cmp",
   },

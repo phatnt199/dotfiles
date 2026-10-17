@@ -31,7 +31,7 @@ local mod = {
           -- Soft visible frame (BlinkCmpDocBorder = dim line on the popup bg).
           border = "rounded",
           max_width = 80,
-          max_height = 40,
+          max_height = 80,
           -- Shrink to the content instead of blink's default 50x10 floor, so the
           -- doc is a compact floating pane (no big empty background) sitting next
           -- to the menu rather than one large connected block.
@@ -42,6 +42,7 @@ local mod = {
       menu = {
         border = "rounded",
         scrollbar = true,
+        max_height = 120,
       },
     },
     signature = {

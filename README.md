@@ -24,7 +24,7 @@ grey-tinted, and calm: *"a dark room with just enough candlelight to read by."*
 | Folder | Tool | Highlights |
 |--------|------|------------|
 | [`confs/alacritty`](confs/alacritty) | [Alacritty](https://alacritty.org/) terminal | True color, OSC52 copy, URL hints, vi-mode, swappable devglow theme |
-| [`confs/tmux`](confs/tmux) | [tmux](https://github.com/tmux/tmux) 3.5a | Vim pane navigation, `Alt+number` window switching, RGB + clipboard passthrough, live system status bar |
+| [`confs/tmux`](confs/tmux) | [tmux](https://github.com/tmux/tmux) ≥ 3.6 | Vim pane navigation, `Alt+number` window switching, RGB + clipboard + CSI-u passthrough, live system status bar |
 | [`confs/zsh`](confs/zsh) | [zsh](https://www.zsh.org/) + [oh-my-zsh](https://ohmyz.sh/) | devglow prompt, fzf, language toolchain `PATH` wiring (Rust, Node/Bun, Java, Android, Go, Flutter, Lua, protoc) |
 | [`confs/neovim`](confs/neovim) | [Neovim](https://neovim.io/) ≥ 0.11 | lazy.nvim, native LSP (0.11 API), blink.cmp completion, Treesitter, Telescope, conform.nvim, modular Lua config |
 

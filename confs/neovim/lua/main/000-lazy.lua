@@ -25,7 +25,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = { { import = "plugs" } },
   install = { colorscheme = { "devglow" } },
-  checker = { enabled = false },
+  checker = { enabled = true, notify = false },
   -- No plugins require luarocks; disable hererocks to silence health warnings.
   rocks = { enabled = false },
 })

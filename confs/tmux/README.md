@@ -1,7 +1,7 @@
 # tmux
 
 Terminal multiplexer configuration — vim-flavored panes, windows, and sessions
-with a live system status bar. Tested on **tmux 3.5a**.
+with a live system status bar. Tested on **tmux 3.6+**.
 
 ## File
 

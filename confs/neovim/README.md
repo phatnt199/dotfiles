@@ -80,6 +80,8 @@ available mappings via **which-key**. Highlights:
 | `<leader>nv` / `nf` | Toggle / focus file tree |
 | `<leader>gd` / `<leader>gh` | Diffview: open / file history |
 | `]c` / `[c` | Next / previous git hunk |
+| `]f` / `[f` | Next / previous file in tree (or directory) |
+| `]g` / `[g` | Next / previous git changed file |
 | `<space>e` | Show diagnostic float |
 | `]d` / `[d` | Next / previous diagnostic |
 | `<leader>dl` | Toggle inline diagnostics (virtual lines) |

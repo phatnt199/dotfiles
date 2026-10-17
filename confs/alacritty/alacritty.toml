@@ -205,7 +205,7 @@ osc52 = "OnlyCopy"
 
 [terminal.shell]
 # Shell program (defaults to $SHELL or login shell from /etc/passwd)
-program = "/bin/zsh"
+program = "/usr/bin/zsh"
 args = ["-l"]
 
 # -----------------------------------------------------------------------------

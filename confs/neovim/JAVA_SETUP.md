@@ -20,12 +20,12 @@ This configuration provides a comprehensive Java development environment with jd
    mkdir -p "${WORKSPACE_ENV}/jdtls/latest"
    mkdir -p "${WORKSPACE_ENV}/jdtls/workspaces"
 
-   # Download the latest jdtls
+   # Download the latest jdtls milestone build
    cd "${WORKSPACE_ENV}/jdtls"
-   wget https://download.eclipse.org/jdtls/milestones/1.9.0/jdt-language-server-1.9.0-202203031534.tar.gz
-   tar -xzf jdt-language-server-*.tar.gz -C latest/
-   rm jdt-language-server-*.tar.gz
-
+   curl -fLO https://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz
+   tar -xzf jdt-language-server-latest.tar.gz -C latest/
+   rm jdt-language-server-latest.tar.gz
+   chmod +x "${WORKSPACE_ENV}/jdtls/latest/bin/jdtls" "${WORKSPACE_ENV}/jdtls/latest/bin/jdtls.py"
    # Verify installation
    ls "${WORKSPACE_ENV}/jdtls/latest/plugins/"
    # Should see org.eclipse.equinox.launcher_*.jar
@@ -74,7 +74,7 @@ Standard LSP keybindings also work:
 - `gd` - Go to definition
 - `gr` - Find references
 - `K` - Show hover documentation
-- `<leader>ca` - Code actions
+- `<leader>ac` - Code actions
 - `<leader>rn` - Rename symbol
 
 ## Configuration Highlights
@@ -82,7 +82,7 @@ Standard LSP keybindings also work:
 ### Multiple Java Versions
 Configure different Java runtimes for different projects:
 
-1. Edit `confs/neovim/lua/plugs/nvim-lsp-conf.lua`
+1. Edit `confs/neovim/lua/plugs/lsp/jdtls.lua`
 2. Uncomment and configure the `configuration.runtimes` section
 3. Set paths to your installed Java versions
 

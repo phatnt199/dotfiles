@@ -46,7 +46,7 @@ set.scrolloff = 8
 set.signcolumn = "yes"
 set.termguicolors = true
 set.background = "dark"
-set.fillchars = "vert:│"
+set.fillchars:append({ vert = "│" })
 set.clipboard = "unnamedplus"
 
 set.completeopt = { "menuone", "noselect", "noinsert" }
@@ -54,8 +54,8 @@ set.completeopt = { "menuone", "noselect", "noinsert" }
 set.shortmess:append({ c = true })
 
 local disabled_providers = { "node", "python3", "perl", "ruby" }
-for index in ipairs(disabled_providers) do
-  g[string.format("loaded_%s_provider", disabled_providers[index])] = 0
+for _, provider in ipairs(disabled_providers) do
+  g[string.format("loaded_%s_provider", provider)] = 0
 end
 
 -- Compatibility shim: silence only the `vim.validate{<table>}` deprecation.
@@ -64,6 +64,8 @@ end
 -- that one message so :checkhealth stays clean; every other deprecation
 -- warning still passes through untouched.
 local _deprecate = vim.deprecate
+
+---@diagnostic disable-next-line: duplicate-set-field
 vim.deprecate = function(name, ...)
   if name == "vim.validate{<table>}" then
     return
