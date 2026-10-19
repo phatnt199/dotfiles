@@ -15,6 +15,7 @@ return {
     hostInfo = "neovim",
     maxTsServerMemory = 4096,
     preferences = {
+      importModuleSpecifierPreference = "non-relative",
       includePackageJsonAutoImports = "on",
       preferTypeOnlyAutoImports = true,
     },

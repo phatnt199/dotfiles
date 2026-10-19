@@ -189,3 +189,6 @@ append_path "$WORKSPACE_ENV/pgFormatter"
 # --------------------------------------------------------------------
 append_path "$WORKSPACE_ENV/kubectl"
 append_path "$WORKSPACE_ENV/git-delta"
+
+# bun completions
+[ -s "/home/tanphat199/.bun/_bun" ] && source "/home/tanphat199/.bun/_bun"
