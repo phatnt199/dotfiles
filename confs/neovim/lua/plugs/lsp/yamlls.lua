@@ -8,8 +8,9 @@ return {
     },
     yaml = {
       validate = true,
+      -- yaml-language-server formats with a bundled prettier; formatting stays with the project.
       format = {
-        enable = true,
+        enable = false,
       },
       schemaStore = {
         enable = true,

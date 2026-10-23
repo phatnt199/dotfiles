@@ -98,8 +98,10 @@ available mappings via **which-key**. Highlights:
 - **Language servers** (install whichever languages you use):
   `ts_ls`, `lua_ls`, `pyright`, `bashls`, `sqlls`, `yamlls`, `dartls`,
   `rust_analyzer`, `jdtls` (Java — see [`JAVA_SETUP.md`](JAVA_SETUP.md))
-- **Formatters** (conform.nvim): `stylua`, `prettier`, `ruff`, `shfmt`,
-  `pg_format`, `taplo`, `yq`, `rustfmt`, `dart`
+- **Formatters** (conform.nvim): `stylua`, `ruff`, `shfmt`, `pg_format`, `taplo`, `rustfmt`, `dart`.
+  JS/TS, JSON, CSS/SCSS/Less, HTML, Vue, Svelte, Markdown/MDX and YAML are all formatted by
+  [`bun fmt`](https://bun.com/docs/format) (Bun ≥ 1.4.4), using the project's `[fmt]` in `bunfig.toml`
+  or its prettier/oxfmt config. No prettier, no LSP formatting.
 
 Plugins are managed by lazy.nvim, which bootstraps itself on first launch.
 

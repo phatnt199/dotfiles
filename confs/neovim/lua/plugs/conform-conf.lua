@@ -1,61 +1,57 @@
-local utilities = require("utilities.index")
+-- Web and data files (js/ts, json, css, html, markdown, yaml, ...) are all formatted by `bun fmt`.
+-- It reads the project's own config ([fmt] in bunfig.toml, or an existing prettier/oxfmt config),
+-- so it runs from the project root. LSP formatting is never used (see ConformFormat).
+local BUN_FMT_FILETYPES = {
+  "javascript",
+  "javascriptreact",
+  "typescript",
+  "typescriptreact",
+  "json",
+  "jsonc",
+  "json5",
+  "css",
+  "scss",
+  "less",
+  "html",
+  "vue",
+  "svelte",
+  "markdown",
+  "mdx",
+  "yaml",
+}
 
--- oxfmt reads `.configs/oxfmt.config.mts` only when told to: a project that keeps it there runs
--- oxfmt from the folder's parent with `-c`. A project with a root config (`.oxfmtrc.json`,
--- `oxfmt.config.ts`) runs oxfmt as conform ships it; any other project falls back to prettier.
-local OXFMT_CONFIG_FILE = "oxfmt.config.mts"
-local OXFMT_ROOT_CONFIGS = { ".oxfmtrc.json", ".oxfmtrc.jsonc", "oxfmt.config.ts" }
-
-local function oxfmt_dot_configs_root(ctx)
-  return utilities.dot_configs_root(ctx.filename, OXFMT_CONFIG_FILE)
-end
-
-local JS_FORMATTERS = { "oxfmt", "prettier", stop_after_first = true }
+local PROJECT_ROOT_MARKERS = { { "bunfig.toml" }, { "package.json", ".git" } }
 
 local mod = {
   "stevearc/conform.nvim",
   cmd = "ConformFormat",
   config = function()
-    local mod = require("conform")
+    local conform = require("conform")
 
-    mod.setup({
-      formatters_by_ft = {
-        lua = { "stylua" },
-        rust = { "rustfmt" },
-        dart = { "dart_format" },
+    local formatters_by_ft = {
+      lua = { "stylua" },
+      rust = { "rustfmt" },
+      dart = { "dart_format" },
 
-        javascript = JS_FORMATTERS,
-        javascriptreact = JS_FORMATTERS,
-        typescript = JS_FORMATTERS,
-        typescriptreact = JS_FORMATTERS,
-        markdown = { "prettier" },
-        html = { "prettier" },
+      -- java = { "clang-format" },  -- Use LSP (jdtls) formatter instead via lsp_format fallback
+      python = { "ruff_fix", "ruff_format" },
+      sh = { "shfmt" },
+      sql = { "pg_format" },
+      toml = { "taplo" },
+    }
+    for _, filetype in ipairs(BUN_FMT_FILETYPES) do
+      formatters_by_ft[filetype] = { "bun_fmt" }
+    end
 
-        -- java = { "clang-format" },  -- Use LSP (jdtls) formatter instead via lsp_format fallback
-        python = { "ruff_fix", "ruff_format" },
-        sh = { "shfmt" },
-        sql = { "pg_format" },
-        toml = { "taplo" },
-
-        json = { "yq", "prettier", stop_after_first = true },
-        yaml = { "yq", "prettier", stop_after_first = true },
-      },
-
+    conform.setup({
+      formatters_by_ft = formatters_by_ft,
       formatters = {
-        oxfmt = {
-          condition = function(_, ctx)
-            return oxfmt_dot_configs_root(ctx) ~= nil
-              or vim.fs.root(ctx.filename, OXFMT_ROOT_CONFIGS) ~= nil
-          end,
-          cwd = function(self, ctx)
-            return oxfmt_dot_configs_root(ctx)
-              or require("conform.util").root_file(OXFMT_ROOT_CONFIGS)(self, ctx)
-          end,
-          prepend_args = function(_, ctx)
-            if oxfmt_dot_configs_root(ctx) then
-              return { "-c", ".configs/" .. OXFMT_CONFIG_FILE }
-            end
-            return {}
+        bun_fmt = {
+          command = "bun",
+          args = { "fmt", "--no-script", "--stdin-filepath", "$FILENAME" },
+          stdin = true,
+          cwd = function(_, ctx)
+            return vim.fs.root(ctx.filename, PROJECT_ROOT_MARKERS) or vim.fs.dirname(ctx.filename)
           end,
         },
       },
@@ -73,7 +69,7 @@ local mod = {
         }
       end
 
-      mod.format({ async = true, lsp_format = "fallback", range = range })
+      conform.format({ async = true, lsp_format = "never", range = range })
     end, { range = true })
   end,
 }
