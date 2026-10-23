@@ -14,7 +14,8 @@ if ! command -v apt-get > /dev/null 2>&1; then
   echo "Install these manually with your package manager instead:"
   echo "  ripgrep, fzf, build-essential (gcc+make), curl, git, unzip,"
   echo "  and a clipboard tool (wl-clipboard on Wayland, or xclip/xsel on X11)."
-  exit 1
+  # Not an error: install.sh should still go on to link the dotfiles.
+  exit 0
 fi
 
 # Universal deps, independent of display server:
