@@ -128,10 +128,11 @@ dotfiles/
 │   ├── tmux/             # multiplexer
 │   │   └── .tmux.conf
 │   ├── zsh/              # shell
-│   │   └── .zshrc
+│   │   ├── .zshrc         loader
+│   │   └── conf.d/        one file per concern / toolchain
 │   └── neovim/           # editor (modular Lua config)
 │       ├── init.lua
-│       ├── lua/...        main/ + plugs/ + plugs/lsp/
+│       ├── lua/...        main/ + plugs/ + langs/
 │       └── JAVA_SETUP.md
 └── backup/               # previous configs (reference only)
 ```

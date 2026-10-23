@@ -3,11 +3,24 @@
 Shell configuration built on [oh-my-zsh](https://ohmyz.sh/), themed with
 **devglow**, and wired up for a polyglot development workflow.
 
-## File
+## Files
+
+`.zshrc` is only a loader: it sources every `conf.d/*.zsh` in name order, then the optional
+machine-private `~/.zshrc.local` (not tracked by git; skipped when absent). The loader finds
+`conf.d/` through the `~/.zshrc` symlink, so linking just `.zshrc` is enough.
 
 | File | Purpose |
 |------|---------|
-| `.zshrc` | oh-my-zsh setup, prompt theme, aliases, and language toolchain `PATH` wiring |
+| `conf.d/00-workspace.zsh` | `WORKSPACE`, `WORKSPACE_ENV`, `WORKSPACE_SAVE` |
+| `conf.d/10-oh-my-zsh.zsh` | oh-my-zsh settings, theme, plugins, then `source oh-my-zsh.sh` |
+| `conf.d/20-env.zsh` | `LANG`, `EDITOR`, `ARCHFLAGS` |
+| `conf.d/30-aliases.zsh` | aliases |
+| `conf.d/40-path.zsh` | unique `PATH` + `append_path` / `prepend_path` helpers |
+| `conf.d/5x-<tool>.zsh` | one file per toolchain: rust, node (nvm), bun, java, android, go, flutter, lua, misc tools |
+| `~/.zshrc.local` | accounts, gateways, keys (e.g. the `claude-*` aliases); yours, never committed |
+
+Add a tool by creating `conf.d/<NN>-<name>.zsh`; the number decides the load order (and so
+the `PATH` order). Files may use the helpers from `40-path.zsh`, so keep tool files after it.
 
 ## Highlights
 
