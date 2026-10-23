@@ -19,7 +19,7 @@ local mod = {
       capabilities = capabilities,
     })
 
-    local servers = require("plugs.lsp.servers")
+    local servers = require("langs").servers
     for name, conf in pairs(servers) do
       if next(conf) ~= nil then
         vim.lsp.config(name, conf)

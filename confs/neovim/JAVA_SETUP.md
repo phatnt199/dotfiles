@@ -82,7 +82,7 @@ Standard LSP keybindings also work:
 ### Multiple Java Versions
 Configure different Java runtimes for different projects:
 
-1. Edit `confs/neovim/lua/plugs/lsp/jdtls.lua`
+1. Edit `confs/neovim/lua/langs/java.lua`
 2. Uncomment and configure the `configuration.runtimes` section
 3. Set paths to your installed Java versions
 

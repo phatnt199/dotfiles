@@ -20,14 +20,14 @@ neovim/
 │   │   ├── 002-autocmds.lua     yank-highlight, cursor restore, big-file guard,
 │   │   │                        LSP buffer-local keymaps (on LspAttach)
 │   │   └── 003-keymaps.lua      global keymaps (data-driven table)
+│   ├── langs/                  # one file per language: LSP + formatter + parser
+│   │   ├── init.lua             aggregator (list of languages → servers, formatters, parsers)
+│   │   └── <lang>.lua           typescript, java, lua, python, rust, yaml, json, …
 │   ├── plugs/                  # one file per plugin (auto-imported)
 │   │   ├── blink-conf.lua        completion
 │   │   ├── telescope-conf.lua    fuzzy finder (+ fzf-native, ui-select)
 │   │   ├── nvim-lsp-conf.lua     LSP orchestration
-│   │   ├── lsp/                  per-language LSP modules
-│   │   │   ├── servers.lua        aggregator (name → config)
-│   │   │   ├── diagnostics.lua    global diagnostic display
-│   │   │   └── <lang>.lua         pyright, lua_ls, rust_analyzer, jdtls, …
+│   │   ├── lsp/diagnostics.lua   global diagnostic display
 │   │   └── …                     treesitter, conform, gitsigns, diffview,
 │   │                             nvim-tree, lualine, markview, which-key, …
 │   └── utilities/
@@ -39,11 +39,12 @@ neovim/
 **Load order:** `init.lua` → `lua/index.lua` → everything in `main/` (by numeric
 prefix) → lazy.nvim imports every spec under `plugs/`.
 
-**LSP architecture:** `nvim-lsp-conf.lua` does orchestration only — it resolves
-blink's completion capabilities, applies global diagnostics, then loops over
-`plugs/lsp/servers.lua`, calling `vim.lsp.config` + `vim.lsp.enable` for each.
-Adding a language = drop a `plugs/lsp/<name>.lua` returning its settings and
-register it in `servers.lua`.
+**Language architecture:** each language has one file in `lua/langs/` returning
+`lsp` (server name → `vim.lsp.config` table), `formatters` (filetype → conform formatters)
+and `parsers` (treesitter), all optional. `langs/init.lua` merges them and fails on a
+duplicate server or filetype. `nvim-lsp-conf.lua` enables the servers, `conform-conf.lua`
+takes the formatters and `nvim-treesitter-conf.lua` installs the parsers. Adding a language =
+create `langs/<name>.lua` and add its name to the list in `langs/init.lua`.
 
 ## Plugins
 
