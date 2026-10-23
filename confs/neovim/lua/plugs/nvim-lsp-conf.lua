@@ -19,14 +19,13 @@ local mod = {
       capabilities = capabilities,
     })
 
-    local enabled = {}
-    for name, conf in pairs(require("plugs.lsp.servers")) do
+    local servers = require("plugs.lsp.servers")
+    for name, conf in pairs(servers) do
       if next(conf) ~= nil then
         vim.lsp.config(name, conf)
       end
-      table.insert(enabled, name)
     end
-    vim.lsp.enable(enabled)
+    vim.lsp.enable(vim.tbl_keys(servers))
   end,
 }
 

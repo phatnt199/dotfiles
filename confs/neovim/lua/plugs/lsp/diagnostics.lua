@@ -2,6 +2,12 @@
 
 local M = {}
 
+-- Severity -> highlight group ("DiagnosticSignError", ...), shared by the sign and its line number.
+local SIGN_HIGHLIGHTS = {}
+for _, name in ipairs({ "Error", "Warn", "Info", "Hint" }) do
+  SIGN_HIGHLIGHTS[vim.diagnostic.severity[name:upper()]] = "DiagnosticSign" .. name
+end
+
 function M.setup()
   vim.diagnostic.config({
     virtual_text = false,
@@ -18,18 +24,8 @@ function M.setup()
         [vim.diagnostic.severity.INFO] = "",
         [vim.diagnostic.severity.HINT] = "󰌶",
       },
-      texthl = {
-        [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-        [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-        [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-        [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-      },
-      numhl = {
-        [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-        [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-        [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-        [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-      },
+      texthl = SIGN_HIGHLIGHTS,
+      numhl = SIGN_HIGHLIGHTS,
     },
   })
 end

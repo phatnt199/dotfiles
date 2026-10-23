@@ -1,19 +1,5 @@
 local module = {}
 
-function module.merge_tables(t1, t2)
-  local result = {}
-
-  for k, v in pairs(t1) do
-    result[k] = v
-  end
-
-  for k, v in pairs(t2) do
-    result[k] = v
-  end
-
-  return result
-end
-
 -- The nearest project root, from `path` upward, whose `.configs/` folder holds `file`
 -- (e.g. "oxlint.config.mts"). Tools never look inside `.configs/` on their own.
 function module.dot_configs_root(path, file)
@@ -32,10 +18,37 @@ function module.find_node_bin(path, bin_name)
   if root then
     return vim.fs.joinpath(root, rel)
   end
-  if vim.fn.executable(bin_name) == 1 then
-    return vim.fn.exepath(bin_name)
+  return vim.fn.executable(bin_name) == 1 and vim.fn.exepath(bin_name) or nil
+end
+
+local function current_file()
+  return vim.fs.normalize(vim.api.nvim_buf_get_name(0))
+end
+
+-- First index (scanning backwards when `reverse`) whose file satisfies `pred`.
+local function index_of(files, pred, reverse)
+  local first, last, by = 1, #files, 1
+  if reverse then
+    first, last, by = #files, 1, -1
   end
-  return nil
+  for i = first, last, by do
+    if pred(files[i]) then
+      return i
+    end
+  end
+end
+
+-- Index to jump to from `current`, wrapping around the list. A `current` that is not in the list
+-- lands on its nearest neighbour in sort order.
+local function target_index(files, current, step)
+  local idx = index_of(files, function(f) return f == current end)
+  if idx then
+    return (idx - 1 + step) % #files + 1
+  end
+  if step > 0 then
+    return index_of(files, function(f) return f > current end) or 1
+  end
+  return index_of(files, function(f) return f < current end, true) or #files
 end
 
 local function cycle_files(files, current, step, label)
@@ -44,135 +57,131 @@ local function cycle_files(files, current, step, label)
     return
   end
 
-  local idx = nil
-  for i, f in ipairs(files) do
-    if f == current then
-      idx = i
-      break
-    end
-  end
-
-  local target_idx
-  if idx then
-    target_idx = ((idx - 1 + step) % #files) + 1
-  elseif step > 0 then
-    target_idx = 1
-    for i, f in ipairs(files) do
-      if f > current then
-        target_idx = i
-        break
-      end
-    end
-  else
-    target_idx = #files
-    for i = #files, 1, -1 do
-      if files[i] < current then
-        target_idx = i
-        break
-      end
-    end
-  end
-
-  local target = files[target_idx]
+  local idx = target_index(files, current, step)
+  local target = files[idx]
   if target ~= current then
     vim.cmd.edit(vim.fn.fnameescape(target))
   end
   local rel = vim.fn.fnamemodify(target, ":.")
-  vim.api.nvim_echo({ { string.format("[%s %d/%d] %s", label, target_idx, #files, rel), "ModeMsg" } }, false, {})
+  vim.api.nvim_echo({ { string.format("[%s %d/%d] %s", label, idx, #files, rel), "ModeMsg" } }, false, {})
 end
 
-local function collect_tree_files(node, out)
-  if not node or not node.nodes then
+local collect_tree_files
+
+local function collect_tree_node(node, out)
+  if node.hidden then
     return
   end
-  for _, child in ipairs(node.nodes) do
-    if not child.hidden then
-      if child.nodes ~= nil then
-        if child.open then
-          collect_tree_files(child, out)
-        end
-      elseif child.absolute_path then
-        table.insert(out, vim.fs.normalize(child.absolute_path))
-      end
+  if node.nodes then
+    if node.open then
+      collect_tree_files(node, out)
     end
+    return
+  end
+  if node.absolute_path then
+    table.insert(out, vim.fs.normalize(node.absolute_path))
   end
 end
 
-local function ensure_editor_win()
+-- Files of the expanded, visible part of an nvim-tree node, in tree order.
+function collect_tree_files(node, out)
+  for _, child in ipairs(node and node.nodes or {}) do
+    collect_tree_node(child, out)
+  end
+end
+
+-- nvim-tree's api when the cursor is in an editor window; steps out of the tree window first.
+local function editor_win_tree_api()
   local ok, api = pcall(require, "nvim-tree.api")
   if ok and api.tree.is_tree_buf(0) then
     vim.cmd.wincmd("p")
   end
-  return ok, api
+  return ok and api or nil
 end
 
-function module.nav_tree_file(step)
-  local ok, api = ensure_editor_win()
-  local current = vim.fs.normalize(vim.api.nvim_buf_get_name(0))
+local function tree_files(api)
   local files = {}
-
-  if ok and api.tree.get_nodes() then
+  if api and api.tree.get_nodes() then
     pcall(api.tree.find_file, { buf = vim.api.nvim_get_current_buf(), open = false, focus = false })
     collect_tree_files(api.tree.get_nodes(), files)
   end
-  -- Fallback to sibling files in the current file's directory when nvim-tree hasn't been opened
-  -- or when the current buffer lies outside the active tree root.
-  local in_tree = false
-  for _, f in ipairs(files) do
-    if f == current then
-      in_tree = true
-      break
+  return files
+end
+
+-- Fallback for when nvim-tree hasn't been opened, or the buffer lies outside the active tree root.
+local function sibling_files(current)
+  local dir = current ~= "" and vim.fs.dirname(current) or vim.fn.getcwd()
+  local files = {}
+  for name, ftype in vim.fs.dir(dir) do
+    if ftype == "file" or ftype == "link" then
+      table.insert(files, vim.fs.normalize(vim.fs.joinpath(dir, name)))
     end
   end
+  table.sort(files)
+  return files
+end
 
-  if not in_tree then
-    files = {}
-    local dir = current ~= "" and vim.fs.dirname(current) or vim.fn.getcwd()
-    for name, ftype in vim.fs.dir(dir) do
-      if ftype == "file" or ftype == "link" then
-        table.insert(files, vim.fs.normalize(vim.fs.joinpath(dir, name)))
-      end
-    end
-    table.sort(files)
+function module.nav_tree_file(step)
+  local api = editor_win_tree_api()
+  local current = current_file()
+  local files = tree_files(api)
+
+  if not vim.list_contains(files, current) then
+    files = sibling_files(current)
   end
 
   cycle_files(files, current, step, "tree")
 end
 
+local GIT_FILE_COMMANDS = {
+  { "git", "diff", "--name-only", "--diff-filter=ACMRTXB", "HEAD" },
+  { "git", "diff", "--name-only", "--diff-filter=ACMRTXB", "--cached" },
+  { "git", "diff", "--name-only", "--diff-filter=ACMRTXB" },
+  { "git", "ls-files", "--others", "--exclude-standard" },
+}
+
+local function git_lines(cmd, cwd)
+  local res = vim.system(cmd, { cwd = cwd, text = true }):wait()
+  if res.code ~= 0 or not res.stdout then
+    return {}
+  end
+  return vim.split(res.stdout, "[\r\n]+", { trimempty = true })
+end
+
+local function unique(list)
+  local seen = {}
+  return vim.tbl_filter(function(item)
+    local first = not seen[item]
+    seen[item] = true
+    return first
+  end, list)
+end
+
+-- Changed (staged, unstaged, vs HEAD) and untracked files of the repo, sorted and still on disk.
+local function git_changed_files(root)
+  local files = vim
+    .iter(GIT_FILE_COMMANDS)
+    :map(function(cmd) return git_lines(cmd, root) end)
+    :flatten()
+    :map(function(line) return vim.fs.normalize(vim.fs.joinpath(root, line)) end)
+    :filter(function(abs) return vim.uv.fs_stat(abs) ~= nil end)
+    :totable()
+
+  files = unique(files)
+  table.sort(files)
+  return files
+end
+
 function module.nav_git_file(step)
-  ensure_editor_win()
-  local current = vim.fs.normalize(vim.api.nvim_buf_get_name(0))
-  local start_path = current ~= "" and current or vim.fn.getcwd()
-  local git_root = vim.fs.root(start_path, ".git")
+  editor_win_tree_api()
+  local current = current_file()
+  local git_root = vim.fs.root(current ~= "" and current or vim.fn.getcwd(), ".git")
   if not git_root then
     vim.notify("Not inside a git repository", vim.log.levels.WARN)
     return
   end
 
-  local seen = {}
-  local files = {}
-  local function add_lines(cmd)
-    local res = vim.system(cmd, { cwd = git_root, text = true }):wait()
-    if res.code == 0 and res.stdout then
-      for line in res.stdout:gmatch("[^\r\n]+") do
-        if line ~= "" and not seen[line] then
-          local abs = vim.fs.normalize(vim.fs.joinpath(git_root, line))
-          if vim.uv.fs_stat(abs) then
-            seen[line] = true
-            table.insert(files, abs)
-          end
-        end
-      end
-    end
-  end
-
-  add_lines({ "git", "diff", "--name-only", "--diff-filter=ACMRTXB", "HEAD" })
-  add_lines({ "git", "diff", "--name-only", "--diff-filter=ACMRTXB", "--cached" })
-  add_lines({ "git", "diff", "--name-only", "--diff-filter=ACMRTXB" })
-  add_lines({ "git", "ls-files", "--others", "--exclude-standard" })
-  table.sort(files)
-
-  cycle_files(files, current, step, "git")
+  cycle_files(git_changed_files(git_root), current, step, "git")
 end
 
-return module;
+return module

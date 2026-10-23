@@ -52,27 +52,32 @@ for _, lhs in ipairs({ "grn", "gra", "grr", "gri", "grt", "grx" }) do
   pcall(vim.keymap.del, "n", lhs)
 end
 
+local function organize_imports()
+  vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" }, diagnostics = {} }, apply = true })
+end
+
+-- { lhs, handler, description, mode }
+local LSP_KEYMAPS = {
+  { "gD", vim.lsp.buf.declaration, "Goto declaration" },
+  { "gd", vim.lsp.buf.definition, "Goto definition" },
+  { "gi", vim.lsp.buf.implementation, "Goto implementation" },
+  { "gr", vim.lsp.buf.references, "References" },
+  { "K", vim.lsp.buf.hover, "Hover docs" },
+  { "<C-k>", vim.lsp.buf.signature_help, "Signature help" },
+  { "<leader>D", vim.lsp.buf.type_definition, "Type definition" },
+  { "<leader>rn", vim.lsp.buf.rename, "Rename symbol" },
+  { "<leader>ac", vim.lsp.buf.code_action, "Code action", { "n", "x" } },
+  { "<leader>cl", vim.lsp.codelens.run, "Run CodeLens" },
+  { "<leader>oi", organize_imports, "Organize imports" },
+}
+
 -- Buffer-local LSP keymaps, attached only when a server is active on the buffer.
 autocmd("LspAttach", {
   group = augroup("lsp_attach_keymaps", { clear = true }),
   callback = function(event)
-    local buf = event.buf
-    local function map(lhs, fn, desc, mode)
-      vim.keymap.set(mode or "n", lhs, fn, { buffer = buf, silent = true, desc = "LSP: " .. desc })
+    for _, keymap in ipairs(LSP_KEYMAPS) do
+      local lhs, handler, desc, mode = unpack(keymap)
+      vim.keymap.set(mode or "n", lhs, handler, { buffer = event.buf, silent = true, desc = "LSP: " .. desc })
     end
-
-    map("gD", vim.lsp.buf.declaration, "Goto declaration")
-    map("gd", vim.lsp.buf.definition, "Goto definition")
-    map("gi", vim.lsp.buf.implementation, "Goto implementation")
-    map("gr", vim.lsp.buf.references, "References")
-    map("K", vim.lsp.buf.hover, "Hover docs")
-    map("<C-k>", vim.lsp.buf.signature_help, "Signature help")
-    map("<leader>D", vim.lsp.buf.type_definition, "Type definition")
-    map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
-    map("<leader>ac", vim.lsp.buf.code_action, "Code action", { "n", "x" })
-    map("<leader>cl", vim.lsp.codelens.run, "Run CodeLens")
-    map("<leader>oi", function()
-      vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" }, diagnostics = {} }, apply = true })
-    end, "Organize imports")
   end,
 })
